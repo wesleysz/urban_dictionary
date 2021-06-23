@@ -1,0 +1,9 @@
+{
+  "name": "urban_dictionary",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server"
+  }
+}
