@@ -5,10 +5,5 @@
   "scripts": {
     "start": "cd frontend && yarn start",
     "server": "cd backend && yarn server"
-  },
-  "devDependencies": {
-    "dotenv-defaults": "^2.0.2",
-    "mongoose": "^5.12.14",
-    "uuid": "^8.3.2"
   }
 }
