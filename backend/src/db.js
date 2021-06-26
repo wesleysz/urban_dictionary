@@ -17,8 +17,9 @@ const postSchema = new Schema({
   example: { type: String, required: true },
   tags: [ {type: String} ],
   if_publish: {type: Boolean, required: true},
-  agree_cnt: {type: Number, required: true},
-  disagree_cnt: {type: Number, required: true}
+  agree_users: [ {type: String} ],
+  disagree_users: [ {type: String} ],
+  create_date: {type: String, required:true}
 //   voice_url: {type:String}
 });
 

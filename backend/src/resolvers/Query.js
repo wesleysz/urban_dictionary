@@ -10,13 +10,19 @@ const Query = {
         return res
         //return Post
     },
-    async queryByUser(  parent, {penName}, { db }, info){
+
+    async queryByUser( parent, {penName}, { db }, info ){
         const author_id = await db.UserModel.findOne({penName: penName})
         const res =  await db.PostModel.find( 
             { author: author_id} //test upper lower case
         );
         return res
         //return Post
+    },
+
+    async randomFivePosts( parent, args, { db }, info ){
+
+        return await db.PostModel.aggregate([{ $sample: { size: 5 } }])
     }
 };
 

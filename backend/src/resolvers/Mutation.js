@@ -38,14 +38,17 @@ const Mutation = {
     // 檢查某些欄位非空，存入DB
     async createPost(parent, {email, vocabulary, explanation, example, tags}, { db }, info){
         const user_id = await db.UserModel.findOne({email})
+        var dt = new Date();
+        dt = String(dt).substring(4, 15)
 
         if(tags){
             const tmp = new db.PostModel({
                 author: user_id,
                 vocabulary, explanation, example, tags, 
                 if_publish: true, 
-                agree_cnt: 0, 
-                disagree_cnt: 0
+                agree_users: [], 
+                disagree_users: [], 
+                create_date: dt
             })
             return await tmp.save();
         }
@@ -54,8 +57,9 @@ const Mutation = {
                 author: user_id,
                 vocabulary, explanation, example,
                 if_publish: true, 
-                agree_cnt: 0, 
-                disagree_cnt: 0
+                agree_users: [], 
+                disagree_users: [], 
+                create_date: dt
             })
             return await tmp.save();
         }
@@ -124,7 +128,73 @@ const Mutation = {
         } catch (e) {
             return {success:false, message:'Post id does not exist.'}
         }
+    }, 
+
+    async addAgree( parent, {post_id, email}, { db }, info ){
+        const post = await db.PostModel.findById(post_id)
+        let disagree = [... post['disagree_users']]
+        let agree = [... post['agree_users']]
+
+        const index = disagree.indexOf(email);
+        if (index !== -1){
+            disagree.splice(index, 1);
+        }
+        const index_a = agree.indexOf(email);
+        if(index_a === -1){
+            agree.push(email)
+        }
+
+        try {
+            const res = await db.PostModel.updateOne(
+                { _id : post_id },
+                { $set: {agree_users: agree, disagree_users: disagree} }
+            );
+            if(res["nModified"] === 1){
+                return {success:true, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            }
+            else{
+                return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            }
+        } catch (e) {
+            return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+        }
+    },
+
+    async addDisagree( parent, {post_id, email}, { db }, info ){
+        const post = await db.PostModel.findById(post_id)
+        let disagree = [... post['disagree_users']]
+        let agree = [... post['agree_users']]
+
+        const index = agree.indexOf(email);
+        if (index !== -1){
+            agree.splice(index, 1);
+        }
+        const index_d = disagree.indexOf(email);
+        if(index_d === -1){
+            disagree.push(email)
+        }
+
+        try {
+            const res = await db.PostModel.updateOne(
+                { _id : post_id },
+                { $set: {agree_users: agree, disagree_users: disagree} }
+            );
+            if(res["nModified"] === 1){
+                return {success:true, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            }
+            else{
+                return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            }
+        } catch (e) {
+            return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+        }
+    },
+
+    async deleteByVocab( parent, {vocabulary}, { db }, info ){
+        await db.PostModel.deleteMany({vocabulary: vocabulary})
+        return true
     }
+
 };
 
 export default Mutation;
