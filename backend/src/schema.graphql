@@ -5,13 +5,15 @@ type Mutation{
     modifyPost( post_id: String!, vocabulary: String, explanation: String, example: String, tags: [String] ): Output!
     unpublishPost( post_id: String!): Output!
     publishPost( post_id: String!): Output!
-
+    addAgree( post_id: String!, email: String! ): AgreeOutput!
+    addDisagree( post_id: String!, email: String! ): AgreeOutput!
+    deleteByVocab( vocabulary:String! ):Boolean!
 }
 
 type Query{
     queryByVocabulary( vocabulary: String! ): [Post!]
     queryByUser( penName: String! ): [Post!]
-    # queryMine()
+    randomFivePosts(number: Int): [Post!]
 }
 
 # type Subscription{
@@ -26,8 +28,9 @@ type Post{
     example: String!,
     tags: [ String ],
     if_publish: Boolean!,
-    agree_cnt: Int!,
-    disagree_cnt: Int!
+    agree_users: [String],
+    disagree_users: [String],
+    create_date: String!
 }
 
 type User{
@@ -41,4 +44,10 @@ type User{
 type Output{
     success: Boolean!
     message: String!
+}
+
+type AgreeOutput{
+    success:Boolean!
+    agree_cnt: Int!
+    disagree_cnt: Int!
 }
