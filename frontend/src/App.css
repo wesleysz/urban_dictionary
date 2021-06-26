@@ -1,38 +1,134 @@
-.App {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Microsoft JhengHei, Arial, Helvetica, sans-serif;
+}
+
+.vsc-initialized{
+  /*設定網頁背景色*/
+  background-color: #a5979b;
+  font-family: Microsoft JhengHei;
+}
+
+.root{
+  margin-bottom: 60px;
+  /* top:0;
+  bottom: 0; */
+}
+
+.header {
+  overflow: hidden;
+  background-color: #4d4d4d;
+  padding: 20px 10px;
+}
+
+.header .row {
+  margin: 0 auto;
+  max-width: 60rem;
+  width: 100%;
+  height: 3.3rem;
+}
+
+.header a.title {
+  float: left;
+  color: #a5979b;
   text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* .header a.logo {
+  font-size: 25px;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.header a.active {
+  background-color: dodgerblue;
   color: white;
+} */
+
+.circle-button {
+  box-shadow: 0 2px 0 rgb(87, 86, 86);
+  border-radius: 50%;
+  display: inline-block;
+  background: #a5979b;
+  height: 3.1875rem;
+  width: 3.1875rem;
+  color: #e2dada;
+  text-align: center;
+  line-height: 3rem;
+  font-size: 1.5625rem;
 }
 
-.App-link {
-  color: #61dafb;
+#content {
+  /* line-height: 1.4;
+  /* border: 2rem;
+  margin:2rem; 
+  vertical-align: top; */
+  margin-top: 2.2rem;
+  margin-left: 25%;
+  margin-right: 25%;
+  /* padding-bottom: 10px; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card{
+  background-color: rgb(247, 233, 233);
+  /* margin-top: 2rem;
+  
+  margin-bottom: 1.25rem; */
+  padding: 1.4rem;
+  color: #333333;
+  box-shadow: 1px 1px 2px #d1d0d0;
+  /* padding-bottom: 0; */
+  word-wrap: break-word; 
+}
+
+.card .tags{
+  padding-left: 1.25rem;
+  font-style:oblique;
+  right: 2em;
+  text-align: right;
+}
+
+.card .vocab{
+  padding-left: 1.25rem;
+  margin-bottom: 2em;
+  height: auto;
+  max-width: none;
+  width: auto;
+}
+
+.card .vocab .word {
+  color: #c27a7a;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 129%;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.card .meaning, .card .example {
+  padding-left: 1.25rem;
+  margin-top: 1.3em;
+  margin-bottom: 1.3em;
+  color: #2C353C;
+}
+
+.card .author{
+  padding-left: 1.25rem;
+  font-weight: bold;
+  right: 2em;
+  text-align: right;
+}
+
+.card .footer{
+  padding-left: 1.25rem;
+  margin-top: 1em;
+  height: auto;
+  max-width: none;
+  width: auto;
 }
