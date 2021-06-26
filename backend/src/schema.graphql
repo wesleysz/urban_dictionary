@@ -1,0 +1,44 @@
+type Mutation{
+    userLogin( name: String!, email: String! ): User!
+    modifyPenName( email: String! , penName:String!): Output!
+    createPost( email: String!, vocabulary: String!, explanation: String!, example: String!, tags: [String] ): Post!
+    modifyPost( post_id: String!, vocabulary: String, explanation: String, example: String, tags: [String] ): Output!
+    unpublishPost( post_id: String!): Output!
+    publishPost( post_id: String!): Output!
+
+}
+
+type Query{
+    queryByVocabulary( vocabulary: String! ): [Post!]
+    queryByUser( penName: String! ): [Post!]
+    # queryMine()
+}
+
+# type Subscription{
+#     subscribeChatBox( name1: String!, name2:String! ): ChatBox!
+# }
+
+type Post{
+    _id: ID!
+    author: User!,
+    vocabulary: String!,
+    explanation: String!,
+    example: String!,
+    tags: [ String ],
+    if_publish: Boolean!,
+    agree_cnt: Int!,
+    disagree_cnt: Int!
+}
+
+type User{
+    _id: ID!
+    name: String!
+    email: String!
+    penName: String
+    posts: [Post!]
+}
+
+type Output{
+    success: Boolean!
+    message: String!
+}
