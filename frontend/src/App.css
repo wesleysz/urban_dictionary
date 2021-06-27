@@ -26,7 +26,20 @@
   margin: 0 auto;
   max-width: 60rem;
   width: 100%;
-  height: 3.3rem;
+  height: 6.6rem;
+}
+
+.header .row .homeBtn{
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.header .row #icon{
+  height: 6.6rem;
+  width: 6.6rem;
 }
 
 .header a.title {

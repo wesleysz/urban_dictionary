@@ -11,8 +11,8 @@ import Add from "./Components/Add";
 import User from "./Containers/User";
 import Search from "./Containers/Search";
 import Author from "./Containers/Author";
-import GoogleBtn from "./Components/GoogleBtn"
-import icon from "./icon.png"
+import GoogleBtn from "./Components/GoogleBtn";
+import icon from "./imgs/icon.png";
 
 function App() {
     const [searchWord,setSearchWord]=useState("")
@@ -22,13 +22,10 @@ function App() {
             <div className="root">
                 <div className="header">
                     <div className="row">
-
-                        <button>
-                            <NavLink width="30" height="30" to="/home"><img src={icon} width="30" height="30"/></NavLink>
+                        <button className="homeBtn">
+                            <NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
                         </button>
-                    </div>
-                    <div className="row">
-                        <a className="circle-button"></a>
+                        
                     </div>
                 </div>
                 {/* <div style={{padding_left: '20px'}}>
