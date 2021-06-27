@@ -26,7 +26,20 @@
   margin: 0 auto;
   /* max-width: 60rem; */
   width: 100%;
-  height: 3.3rem;
+  height: 6.6rem;
+}
+
+.header .row-title .homeBtn{
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.header .row-title #icon{
+  height: 6.4rem;
+  width: 6.4rem;
 }
 .header .row-bar {
   margin-left: 25%;
