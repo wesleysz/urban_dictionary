@@ -65,7 +65,7 @@ function App() {
           <div className="row-bar" >
             <Input.Search
               style={{ width: "100%"}} 
-              placeholder="敬愛的網友，想探聽點什麼？"
+              placeholder="親愛的網友，想探聽點什麼？"
               allowClear
               enterButton="搜尋"
               size="large"

@@ -29,7 +29,7 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 				</Button>
 			</div>
 			<div className="card-footer" > 
-				<div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by {author.penName}. {create_date}</div>
+				<div className="text"> by {author.penName}. {create_date}</div>
 			</div>
 		</div>
 	);
