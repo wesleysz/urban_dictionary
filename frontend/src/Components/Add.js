@@ -16,9 +16,10 @@ const Add = ()=>{
 	const [addPost] = useMutation(MUT_CREATE_POST);
 
 	const check = useLocation();
+	console.log("check", check)
 	if(!check.state){
 		return(
-			<Redirect exact={true} from="/add" to="/" />
+			<Redirect exact={true} from="/add" to="/add/NotLogin" />
 		)
 	}
 	const {email} = check.state;

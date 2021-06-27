@@ -4,8 +4,17 @@
   font-family: Microsoft JhengHei, Arial, Helvetica, sans-serif;
 }
 
-
-
+.background{
+  display:block;
+  /*set the div in the top-left corner of the screen*/
+  position:fixed;
+  top:0;
+  left:0;
+  background-color: #739fbd;
+  /*set the width and height to 100% of the screen*/
+  width:100%;
+  height:100%;
+}
 
 .header {
   overflow: hidden;
