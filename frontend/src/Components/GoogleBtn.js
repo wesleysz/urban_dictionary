@@ -48,13 +48,14 @@ class GoogleBtn extends Component {
 
   render() {
     return (
-    <div>
+    <>
       { this.state.isLogined ?
         <GoogleLogout
           clientId={ CLIENT_ID }
           buttonText='Logout'
           onLogoutSuccess={ this.logout }
           onFailure={ this.handleLogoutFailure }
+          style={{backgroundColor:"transparent"}}
         >
         </GoogleLogout>: <GoogleLogin
           clientId={ CLIENT_ID }
@@ -63,11 +64,12 @@ class GoogleBtn extends Component {
           onFailure={ this.handleLoginFailure }
           cookiePolicy={ 'single_host_origin' }
           responseType='code,token'
+          style={{backgroundColor:"transparent"}}
         />
       }
-      { this.state.accessToken ? <h5>Your Access Token: <br/><br/> { this.state.accessToken }</h5> : null }
+      {/* { this.state.accessToken ? <h5>Your Access Token: <br/><br/> { this.state.accessToken }</h5> : null } */}
 
-    </div>
+    </>
     )
   }
 }
