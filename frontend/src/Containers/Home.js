@@ -19,7 +19,7 @@ const Home=()=>{
 						<NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
 					</button>
 					<div className="row-title-bottons" >
-						<Space size={14}>
+						<Space size={18}>
 							<NavLink to="/add"><Button className="botton">新增單字</Button></NavLink> 
 							<NavLink className="botton" to={{pathname:"/User", state:{id:100}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> 
 							<GoogleBtn className="botton"></GoogleBtn>
