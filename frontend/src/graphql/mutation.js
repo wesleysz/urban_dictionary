@@ -1,8 +1,29 @@
 import { gql } from '@apollo/client';
 
-const MUT_USER_LOGIN="";
+const MUT_USER_LOGIN=gql`
+mutation asUserLogin($name:String!, $email:String!){
+  userLogin(
+    name: $name
+    email: $email
+  ){
+    _id
+    name
+    email
+    penName
+  }
+}
+`;
 
-const MUT_MODIFY_PEN_NAME="";
+const MUT_MODIFY_PEN_NAME=gql`mutation ModifyPen($email: String!, $pen:String!){
+	modifyPenName(
+	  email: $email
+	  penName: $pen
+	){
+	  success
+	  message
+	}
+  }`
+  ;
 
 const MUT_CREATE_POST="";
 

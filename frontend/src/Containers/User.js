@@ -1,20 +1,27 @@
 import React, { Component } from "react";
+import { useState, useEffect } from 'react';
 import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom";
 import { Space, Input } from 'antd';
 import GoogleBtn from "../Components/GoogleBtn"
 import Card from "../Components/Card";
 import icon from "../imgs/icon.png";
 import { Button } from '@material-ui/core';
+import { useMutation } from '@apollo/react-hooks';
+import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN } from "../graphql"
 
-function User (){
+function User ({afunction,hi}){
+	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
 	const check = useLocation();
+	const [showMsg, setshowMsg]=useState(false);
+	const [Msg, setMsg]=useState('');
+	const [Pen, setPen]=useState('[你尚未設定筆名]');
+	useEffect(()=>{if(check.state && check.state.pen)setPen(check.state.pen); return(()=>{console.log("unmountede",hi)})},[check])
 	if(!check.state){
 		return(
 			<Redirect exact={true} from="/user" to="/" />
 		)
 	}
-	const {isLogined, name, email} = check.state;
-	
+	const { name, email} = check.state;
 	return(
 		<>
 		{/* <div className="header">
@@ -33,16 +40,26 @@ function User (){
 		</div> */}
 		<div id="content">
 		<div className="row-bar" >
-			{name}，你目前的筆名為{email}。請輸入想更改為的筆名：
+			{name}，你目前的筆名為{Pen}。請輸入想更改為的筆名：
 			<Input.Search
               style={{ width: "100%"}} 
               placeholder="敬愛的網友，如何稱呼？"
               allowClear
               enterButton="儲存"
               size="medium"
-              // onSearch={}
+			 // onSearch={afunction}
+              onSearch={async (penName)=>{
+				const {data} = await startModPen({variables:{pen:penName, email:email}})
+				setMsg(data.modifyPenName.message)//success
+				setshowMsg(true)
+				afunction();
+				if(data.modifyPenName.success)
+					setPen(penName);
+				}
+			  }
             />
 		</div>
+		{showMsg?<p>{Msg}</p>:null}
 		你目前定義過的單字：
 		</div>
 		</>
