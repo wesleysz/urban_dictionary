@@ -22,6 +22,7 @@ const Cards=({data})=>{
 			agree_users={data[i].agree_users}
 			disagree_users={data[i].disagree_users}
 			create_date={data[i].create_date}
+			key={i}
 		/>);
 	}
 	return (

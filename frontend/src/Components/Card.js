@@ -11,8 +11,8 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 			<div className="vocab">
 				<a className="word">{vocabulary}</a>
 			</div>
-			<div className="meaning">{explanation}</div>
-			<div className="example">{example}</div>
+			<div className="meaning">釋義：{explanation}</div>
+			<div className="example">例句：{example}</div>
 			<div className="author"> </div>
 			<div className="card-footer"> 
 				<Button >
@@ -29,7 +29,7 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 				</Button>
 			</div>
 			<div className="card-footer" > 
-				<div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by {author.penName}. {create_date}</div>
+				<div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> 由 {author.penName} 創建於 {create_date}</div>
 			</div>
 		</div>
 	);
