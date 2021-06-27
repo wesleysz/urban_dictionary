@@ -6,7 +6,7 @@
 
 .vsc-initialized{
   /*設定網頁背景色*/
-  background-color: #a5979b;
+  background-color: #739fbd;
   font-family: Microsoft JhengHei;
 }
 
@@ -18,20 +18,28 @@
 
 .header {
   overflow: hidden;
-  background-color: #4d4d4d;
+  background-color: #534b48;
   padding: 20px 10px;
 }
 
-.header .row {
+.header .row-title {
   margin: 0 auto;
-  max-width: 60rem;
+  /* max-width: 60rem; */
   width: 100%;
   height: 3.3rem;
+}
+.header .row-bar {
+  margin-left: 25%;
+  margin-right: 25%;
+  /* margin: 0 auto; */
+  /* max-width: 60rem; */
+  width: 100%;
+  height: 4rem;
 }
 
 .header a.title {
   float: left;
-  color: #a5979b;
+  color: #739fbd;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -52,10 +60,10 @@
 } */
 
 .circle-button {
-  box-shadow: 0 2px 0 rgb(87, 86, 86);
+  box-shadow: 0 2px 0 rgb(75, 76, 76);
   border-radius: 50%;
   display: inline-block;
-  background: #a5979b;
+  background: #739fbd;
   height: 3.1875rem;
   width: 3.1875rem;
   color: #e2dada;
@@ -76,13 +84,13 @@
 }
 
 .card{
-  background-color: rgb(247, 233, 233);
+  background-color: rgb(209, 238, 250);
   /* margin-top: 2rem;
   
   margin-bottom: 1.25rem; */
   padding: 1.4rem;
   color: #333333;
-  box-shadow: 1px 1px 2px #d1d0d0;
+  box-shadow: 1px 1px 2px #a9aaaa;
   /* padding-bottom: 0; */
   word-wrap: break-word; 
 }
@@ -103,7 +111,7 @@
 }
 
 .card .vocab .word {
-  color: #c27a7a;
+  color: #184dbe;
   font-size: 2rem;
   font-weight: bold;
   line-height: 129%;
@@ -132,3 +140,9 @@
   max-width: none;
   width: auto;
 }
+/* .card .vocab .word {
+  color: #831717;
+  font-weight: bold;
+  text-decoration: none;
+  vertical-align: middle;
+} */
