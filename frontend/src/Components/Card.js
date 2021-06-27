@@ -5,11 +5,9 @@ import {ThumbUp, ThumbDown} from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
 
 const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
-	let pen=(author.penName)?author.penName:author.name;
-	console.log(vocabulary);
 	return (
 		<div className="card">
-			<div className="tags">#tag1 #tag2</div>
+			{/*<div className="tags">#tag1 #tag2</div>*/}
 			<div className="vocab">
 				<a className="word">{vocabulary}</a>
 			</div>
@@ -31,7 +29,7 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 				</Button>
 			</div>
 			<div className="card-footer" > 
-				<div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by {pen}. {create_date}</div>
+				<div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by {author.penName}. {create_date}</div>
 			</div>
 		</div>
 	);
