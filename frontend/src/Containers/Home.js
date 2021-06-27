@@ -20,8 +20,8 @@ const Home=()=>{
           </button>
           <div className="row-title-bottons" >
             <Space size={14}>
-              <Button className="botton"> Add new word </Button> 
-              <Button className="botton"> <NavLink className="botton" to={{pathname:"/User", state:{id:100}}}> User info </NavLink> </Button> 
+              <Button className="botton"> 新增單字 </Button> 
+              <Button className="botton"> <NavLink className="botton" to={{pathname:"/User", state:{id:100}}}> 應該會變成使用者名稱 </NavLink> </Button> 
               <GoogleBtn className="botton"></GoogleBtn>
             </Space>
           </div>
@@ -30,9 +30,9 @@ const Home=()=>{
           {/* <Space >  */}
             <Input.Search
               style={{ width: "100%"}} 
-              placeholder="Type any word..."
+              placeholder="敬愛的網友，想探聽點什麼？"
               allowClear
-              enterButton="Search"
+              enterButton="搜尋"
               size="large"
               // onSearch={}
             />

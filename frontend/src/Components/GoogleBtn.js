@@ -39,11 +39,11 @@ class GoogleBtn extends Component {
   }
 
   handleLoginFailure (response) {
-    alert('Failed to log in')
+    alert('登入失敗')
   }
 
   handleLogoutFailure (response) {
-    alert('Failed to log out')
+    alert('登出失敗')
   }
 
   render() {
@@ -52,14 +52,14 @@ class GoogleBtn extends Component {
       { this.state.isLogined ?
         <GoogleLogout
           clientId={ CLIENT_ID }
-          buttonText='Logout'
+          buttonText='登出'
           onLogoutSuccess={ this.logout }
           onFailure={ this.handleLogoutFailure }
           style={{backgroundColor:"transparent"}}
         >
         </GoogleLogout>: <GoogleLogin
           clientId={ CLIENT_ID }
-          buttonText='Login'
+          buttonText='以GOOGLE登入'
           onSuccess={ this.login }
           onFailure={ this.handleLoginFailure }
           cookiePolicy={ 'single_host_origin' }
