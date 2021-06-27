@@ -5,6 +5,7 @@ import {Input} from 'antd';
 import { Button } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
 import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN } from "../graphql"
+import Message from '../Hooks/Message';
 
 function User ({afunction,hi}){
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
@@ -30,8 +31,9 @@ function User ({afunction,hi}){
 		</div>
 		<div id="user">
 			<div className="component" >
+				<div className="padding"/>
 				<div className="title">
-					{name}，你目前的筆名為{Pen}
+					{name}，你目前的筆名為"{Pen}"
 				</div>
 				{changePenName?
 					<Input.Search
@@ -43,22 +45,28 @@ function User ({afunction,hi}){
 						size="medium"
 						onSearch={async (penName)=>{
 							const {data} = await startModPen({variables:{pen:penName, email:email}})
-							setMsg(data.modifyPenName.message)//success
-							setshowMsg(true)
-							afunction();
-							if(data.modifyPenName.success)
+							if(data.modifyPenName.success){
 								setPen(penName);
+								setChanegPenName(false);
+								setshowMsg(false);
+								Message({status:"success", msg:"成功更改筆名"})
+							}
+							else{
+								setMsg(data.modifyPenName.message)//success
+								setshowMsg(true)
+								afunction();
+							}
 						}
 					}
 					/> :
 					<Button variant="outlined" className="botton" onClick={()=>{setChanegPenName(true)}}>更改筆名</Button>
-				}	
-			</div>
-			<div className="component" >
+				}
+				{showMsg?<p className="msg">{Msg}</p>:<p className="msg"/>}
+			
 				<div className="title">
-					{showMsg?<p>{Msg}</p>:null}
 					你目前定義過的單字：
 				</div>
+				<div className="padding"/>
 			</div>
 		</div>
 		</>
