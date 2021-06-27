@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import {useState} from 'react';
 import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 import GoogleBtn from "../Components/GoogleBtn"
@@ -11,8 +11,10 @@ import {useQuery} from '@apollo/react-hooks'
 import {QUE_RANDOM_FIVE_POSTS} from "../graphql/index";
 
 const Home=()=>{
-	let list=[];
-	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}});
+	const [List, setList] = useState([]);
+	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}, fetchPolicy: "cache-and-network"});
+	useEffect(()=>{if(data) setList(data.randomFivePosts);return(()=>{console.log('home unmouted')})},[data])
+	//refetch();
 	console.log("data",data);
 	console.log("error",error);
 	console.log("loading",loading);
@@ -25,7 +27,7 @@ const Home=()=>{
 	}
 	return(
 		<div id="content">
-			<Cards data={data.randomFivePosts}/>
+			<Cards data={List}/>
 		</div>
 	)
 }

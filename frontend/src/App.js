@@ -7,14 +7,15 @@ import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
 import User from "./Containers/User";
 import Home from "./Containers/Home";
-import Search from "./Containers/Search";
 import Author from "./Containers/Author";
+import Define from "./Containers/Define";
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
 import {MUT_USER_LOGIN} from "./graphql"
 import { Button} from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
 import { Space, Input } from 'antd';
+// import location from "Document";
 
 function App() {
   const [startLogin] = useMutation(MUT_USER_LOGIN)
@@ -69,17 +70,24 @@ function App() {
               allowClear
               enterButton="搜尋"
               size="large"
-              // onSearch={}
+              onSearch={(term)=>{
+				console.log(term);
+				let path="/term/"+term;
+				console.log(path);
+				<Redirect to={path} />;
+              	// windows.location.href=windows.location.href.replace("/","/term/"+term);
+              }}
             />
           </div>
         </div>
           <Switch>
             <Route exact={true} path="/login" component={LogIn} />
+            <Route exact={true} path="/define" component={Define} />
+            <Route exact={false} path="/define/:term?" component={Define} />
             <Route exact={true} path="/add" component={Add} />
             <Route exact={true} path="/add/notLogin" component={NotLogin}/>
-				    <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
+			<Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
             <Route exact={true} path="/" component={Home} />
-            <Route exact={true} path="/search" component={Search} />
             <Route exact={true} path="/author" component={Author} />
             <Redirect exact={true} from="/home" to="/" />
           </Switch>
