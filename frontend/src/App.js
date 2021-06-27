@@ -1,8 +1,7 @@
 import './App.css';
-import React from "react";
+import React, { useEffect } from "react";
 import {useState} from 'react';
-import { BrowserRouter } from "react-router-dom";
-import { NavLink, Switch, Route, Redirect } from "react-router-dom";
+import { NavLink, Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -13,9 +12,8 @@ import Author from "./Containers/Author";
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
 import {MUT_USER_LOGIN} from "./graphql"
-import {Typography, Button} from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
-import {ThumbUp, ThumbDown} from '@material-ui/icons';
 import { Space, Input } from 'antd';
 
 function App() {
@@ -24,6 +22,7 @@ function App() {
   const [userEmail, setuserEmail]=useState("");
   const [userpenName, setuserpenName]=useState(undefined);
 	const [isLogin, setisLogin]=useState(false);
+
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
 		setuserName(profile.getName());
@@ -45,7 +44,7 @@ function App() {
     setuserpenName(data.userLogin.penName)
     //console.log("was clled")
 	}
-  
+
 	return (
 		<BrowserRouter>
       <div className="background">
@@ -64,7 +63,6 @@ function App() {
             </div>
           </div>
           <div className="row-bar" >
-            {/* <Space >  */}
             <Input.Search
               style={{ width: "100%"}} 
               placeholder="敬愛的網友，想探聽點什麼？"
@@ -73,8 +71,6 @@ function App() {
               size="large"
               // onSearch={}
             />
-            {/* <a className="circle-button"></a> */}
-            {/* </Space> */}
           </div>
         </div>
           <Switch>
