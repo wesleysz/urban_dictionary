@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom";
 
 
-export default class User extends Component{
-	render(){
-		return(
+function User (){
+	const {state:{id}} = useLocation();
+	return(
 		<div>
-			I me my mine
+			I me my {id} mine
+			<button>
+				<NavLink to="/add">Add</NavLink>
+			</button>
 		</div>
-		);
-	}
+	);
 }
+
+export default  User
