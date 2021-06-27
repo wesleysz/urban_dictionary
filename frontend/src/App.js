@@ -11,6 +11,7 @@ import Author from "./Containers/Author";
 import Define from "./Containers/Define";
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
+import Message from './Hooks/Message';
 import {MUT_USER_LOGIN} from "./graphql"
 import { Button} from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
@@ -37,6 +38,7 @@ function App() {
     setuserEmail("");
 		setisLogin(false);
     setuserpenName(undefined);
+    Message({status: "success", msg: "登出成功！"});
     <Redirect exact={true} from="/user" to="/" />
 	}
 
@@ -58,7 +60,7 @@ function App() {
               <Space size={18}>
               {isLogin?<NavLink to={{pathname:"/add", state:{ email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null}
               {isLogin?<NavLink to={{pathname:"/user", state:{ pen:userpenName ,name:userName, email:userEmail}}}>
-              <Button className="botton">目前登入者：{userName}</Button></NavLink> :null}
+              <Button className="botton">{userName}，你好</Button></NavLink> :null}
             <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
               </Space>
             </div>
