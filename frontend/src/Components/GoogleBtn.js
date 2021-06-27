@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 
 
 const CLIENT_ID = '696468782740-2vesa30iij2dnu0hkn4e0vflehu240hk.apps.googleusercontent.com';
@@ -10,8 +11,7 @@ class GoogleBtn extends Component {
     super(props);
 
     this.state = {
-      isLogined: false,
-      accessToken: ''
+      isLogined: false
     };
 
     this.login = this.login.bind(this);
@@ -25,17 +25,17 @@ class GoogleBtn extends Component {
     console.log('Name: ' + profile.getName());
     if(profile){
       this.setState(state => ({
-        isLogined: true,
-        accessToken: profile.getName()
+        isLogined: true
       }));
     }
+    this.props.login(googleUser);
   }
 
   logout (response) {
     this.setState(state => ({
-      isLogined: false,
-      accessToken: ''
+      isLogined: false
     }));
+    this.props.logout();
   }
 
   handleLoginFailure (response) {
@@ -49,18 +49,18 @@ class GoogleBtn extends Component {
   render() {
     return (
     <>
-      { this.state.isLogined ?
-        <GoogleLogout
+      { this.props.isLogined ?
+        <NavLink  to="/home"><GoogleLogout
           clientId={ CLIENT_ID }
           buttonText='登出'
-          onLogoutSuccess={ this.logout }
+          onLogoutSuccess={ this.props.logout }
           onFailure={ this.handleLogoutFailure }
           style={{backgroundColor:"transparent"}}
         >
-        </GoogleLogout>: <GoogleLogin
+        </GoogleLogout></NavLink>: <GoogleLogin
           clientId={ CLIENT_ID }
           buttonText='以GOOGLE登入'
-          onSuccess={ this.login }
+          onSuccess={ this.props.login }
           onFailure={ this.handleLoginFailure }
           cookiePolicy={ 'single_host_origin' }
           responseType='code,token'

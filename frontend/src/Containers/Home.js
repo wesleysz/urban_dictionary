@@ -11,9 +11,10 @@ import { Space, Input } from 'antd';
 const Home=()=>{
 	const [searchWord,setSearchWord]=useState("");
 	const [searchAuthor, setSearchAuthor]=useState("");
+	
 	return (
 		<>
-			<div className="header">
+			{/* <div className="header">
 				<div className="row-title">
 					<button className="homeBtn">
 						<NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
@@ -21,13 +22,12 @@ const Home=()=>{
 					<div className="row-title-bottons" >
 						<Space size={18}>
 							<NavLink to="/add"><Button className="botton">新增單字</Button></NavLink> 
-							<NavLink className="botton" to={{pathname:"/User", state:{id:100}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> 
-							<GoogleBtn className="botton"></GoogleBtn>
+							<NavLink className="botton" to={{pathname:"/User", state:{id:100, name:userName, isLogined:isLogin}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> 
+							<GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
 						</Space>
 					</div>
 				</div>
 				<div className="row-bar" >
-					{/* <Space >  */}
 					<Input.Search
 						style={{ width: "100%"}} 
 						placeholder="敬愛的網友，想探聽點什麼？"
@@ -36,14 +36,12 @@ const Home=()=>{
 						size="large"
 						// onSearch={}
 					/>
-					{/* <a className="circle-button"></a> */}
-					{/* </Space> */}
 				</div>
-			</div>
+			</div> */}
 			<div id="content">
 				<Cards mode={"random"}/>
-			</div>
-			<div className="footer" />
+			 </div>
+			{/*<div className="footer" /> */}
 		</>
 	);
 }
