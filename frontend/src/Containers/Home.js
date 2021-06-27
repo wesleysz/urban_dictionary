@@ -2,51 +2,50 @@ import React, { Component } from "react";
 import {useState} from 'react';
 import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 import GoogleBtn from "../Components/GoogleBtn"
-import Card from "../Components/Card";
+import Cards from "../Containers/Cards";
 import icon from "../imgs/icon.png";
 import {Typography, Button} from '@material-ui/core';
 import {ThumbUp, ThumbDown} from '@material-ui/icons';
 import { Space, Input } from 'antd';
 
 const Home=()=>{
-	const [searchWord,setSearchWord]=useState("")
-	const [searchAuthor, setSearchAuthor]=useState("")
+	const [searchWord,setSearchWord]=useState("");
+	const [searchAuthor, setSearchAuthor]=useState("");
 	return (
-	<>
-	<div className="header">
-        <div className="row-title">
-          <button className="homeBtn">
-            <NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
-          </button>
-          <div className="row-title-bottons" >
-            <Space size={14}>
-              <Button className="botton"> 新增單字 </Button> 
-              <Button className="botton"> <NavLink className="botton" to={{pathname:"/User", state:{id:100}}}> 應該會變成使用者名稱 </NavLink> </Button> 
-              <GoogleBtn className="botton"></GoogleBtn>
-            </Space>
-          </div>
-        </div>
-        <div className="row-bar" >
-          {/* <Space >  */}
-            <Input.Search
-              style={{ width: "100%"}} 
-              placeholder="敬愛的網友，想探聽點什麼？"
-              allowClear
-              enterButton="搜尋"
-              size="large"
-              // onSearch={}
-            />
-            {/* <a className="circle-button"></a> */}
-          {/* </Space> */}
-        </div>
-    </div>
-	<div id="content">
-		<Card wordId={1}/>
-		<Card wordId={2}/>
-	</div>
-	<div className="footer" />
-	</>
-	)
+		<>
+			<div className="header">
+				<div className="row-title">
+					<button className="homeBtn">
+						<NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
+					</button>
+					<div className="row-title-bottons" >
+						<Space size={14}>
+							<NavLink to="/add"><Button className="botton">新增單字</Button></NavLink> 
+							<NavLink className="botton" to={{pathname:"/User", state:{id:100}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> 
+							<GoogleBtn className="botton"></GoogleBtn>
+						</Space>
+					</div>
+				</div>
+				<div className="row-bar" >
+					{/* <Space >  */}
+					<Input.Search
+						style={{ width: "100%"}} 
+						placeholder="敬愛的網友，想探聽點什麼？"
+						allowClear
+						enterButton="搜尋"
+						size="large"
+						// onSearch={}
+					/>
+					{/* <a className="circle-button"></a> */}
+					{/* </Space> */}
+				</div>
+			</div>
+			<div id="content">
+				<Cards mode={"random"}/>
+			</div>
+			<div className="footer" />
+		</>
+	);
 }
 
 export default Home;
