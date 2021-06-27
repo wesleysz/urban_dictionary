@@ -11,8 +11,9 @@ type Mutation{
 }
 
 type Query{
-    queryByVocabulary( vocabulary: String! ): [Post!]
+    queryByString( str: String! ): [Post!]
     queryByUser( penName: String! ): [Post!]
+    queryByVocabulary( vocabulary: String! ): [Post!]
     randomFivePosts(number: Int): [Post!]
 }
 

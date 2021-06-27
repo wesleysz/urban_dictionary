@@ -1,14 +1,13 @@
 const Query = {
-    async queryByVocabulary( parent, {vocabulary}, { db }, info ){
-        if(vocabulary.length === 0){
+    async queryByString( parent, {str}, { db }, info ){
+        if(str.length === 0){
             return []
         }
 
         const res =  await db.PostModel.find( 
-            { vocabulary: { $regex: new RegExp(vocabulary, "i")}} //test upper lower case
+            { vocabulary: { $regex: new RegExp(str, "i")}} //test upper lower case
         );
         return res
-        //return Post
     },
 
     async queryByUser( parent, {penName}, { db }, info ){
@@ -17,7 +16,17 @@ const Query = {
             { author: author_id} //test upper lower case
         );
         return res
-        //return Post
+    },
+
+    async queryByVocabulary( parent, {vocabulary}, { db }, info ){
+        if(vocabulary.length === 0){
+            return []
+        }
+        const res =  await db.PostModel.find( 
+            { vocabulary: {$regex: new RegExp('^' + vocabulary+'$', 'i')} }
+            // { vocabulary: new RegExp(vocabulary, "i")} //test upper lower case
+        );
+        return res
     },
 
     async randomFivePosts( parent, args, { db }, info ){
