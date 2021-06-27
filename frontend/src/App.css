@@ -4,11 +4,6 @@
   font-family: Microsoft JhengHei, Arial, Helvetica, sans-serif;
 }
 
-.vsc-initialized{
-  /*設定網頁背景色*/
-  background-color: #739fbd;
-  font-family: Microsoft JhengHei;
-}
 
 .root{
   margin-bottom: 60px;
@@ -42,8 +37,8 @@
   width: 6.4rem;
 }
 .header .row-bar {
-  margin-left: 25%;
-  margin-right: 25%;
+  padding-left: 25%;
+  padding-right: 25%;
   /* margin: 0 auto; */
   /* max-width: 60rem; */
   width: 100%;
@@ -93,14 +88,15 @@
   margin-top: 2.2rem;
   margin-left: 25%;
   margin-right: 25%;
+  /* margin-bottom: 3rem; */
   /* padding-bottom: 10px; */
 }
 
 .card{
   background-color: rgb(209, 238, 250);
-  /* margin-top: 2rem;
+  /* margin-top: 2rem;*/
   
-  margin-bottom: 1.25rem; */
+  margin-bottom: 2.4rem; 
   padding: 1.4rem;
   color: #333333;
   box-shadow: 1px 1px 2px #a9aaaa;
@@ -109,9 +105,9 @@
 }
 
 .card .tags{
-  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   font-style:oblique;
-  right: 2em;
+  /* right: 2.3em; */
   text-align: right;
 }
 
@@ -134,7 +130,7 @@
 
 .card .meaning, .card .example {
   padding-left: 1.25rem;
-  margin-top: 1.3em;
+  margin-top: 1.7em;
   margin-bottom: 1.3em;
   color: #2C353C;
 }
@@ -144,18 +140,21 @@
   font-weight: bold;
   right: 2em;
   text-align: right;
+  /* padding-bottom: 1rem; */
 }
 
-.card .footer{
-  padding-left: 1.25rem;
-  margin-top: 1em;
-  height: auto;
+.card .card-footer{
+  display: inline-block;
+  padding:1.25rem;
+  /* padding-left: 1.25rem; */
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  height: 2rem;
   max-width: none;
+  width: 50%;
+}
+
+.footer {
+  height: 3rem;
   width: auto;
 }
-/* .card .vocab .word {
-  color: #831717;
-  font-weight: bold;
-  text-decoration: none;
-  vertical-align: middle;
-} */

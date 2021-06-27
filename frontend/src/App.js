@@ -30,17 +30,17 @@ function App() {
             </button>
           </div>
           <div className="row-bar" >
-            <Space size={50}> 
+            {/* <Space >  */}
               <Input.Search
-                style={{ width: "44rem" }} 
+                style={{ width: "100%"}} 
                 placeholder="Type any word..."
                 allowClear
                 enterButton="Search"
                 size="large"
                 // onSearch={}
               />
-              <a className="circle-button"></a>
-            </Space>
+              {/* <a className="circle-button"></a> */}
+            {/* </Space> */}
           </div>
         </div>
 
@@ -52,8 +52,8 @@ function App() {
             </div>
             <div className="meaning">explanation........</div>
             <div className="example">example..........</div>
-            <div className="author"> by me. June 21, 2021</div>
-            <div className="footer"> 
+            <div className="author"> </div>
+            <div className="card-footer"> 
               <Button >
                 <Space size={4}> 
                   <ThumbUp color="primary" />
@@ -67,8 +67,42 @@ function App() {
                 </Space>
               </Button>
             </div>
+            <div className="card-footer" > 
+              <div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by me. June 21, 2021</div>
+            </div>
           </div>
+
+          <div className="card">
+            <div className="tags">#tag1 #tag2</div>
+            <div className="vocab">
+              <a className="word">Vocabulary</a>
+            </div>
+            <div className="meaning">explanation........</div>
+            <div className="example">example..........</div>
+            <div className="author"> </div>
+            <div className="card-footer"> 
+              <Button >
+                <Space size={4}> 
+                  <ThumbUp color="primary" />
+                  <Typography variant="button" display="block" gutterBottom >12</Typography>
+                </Space>
+              </Button>
+              <Button >
+                <Space size={4}> 
+                  <ThumbDown color="primary" />
+                  <Typography variant="button" display="block" gutterBottom >2</Typography>
+                </Space>
+              </Button>
+            </div>
+            <div className="card-footer" > 
+              <div style={{fontWeight:"bold", textAlign:"right", paddingBottom:"1rem"}}> by me. June 21, 2021</div>
+            </div>
+          </div>
+
         </div>
+
+        <div className="footer" />
+
       </div>
     </BrowserRouter>        
     );
