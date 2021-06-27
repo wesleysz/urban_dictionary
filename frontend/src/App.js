@@ -40,8 +40,8 @@ function App() {
         </button>
         <div className="row-title-bottons" >
           <Space size={18}>
-            {isLogin?<NavLink to="/add" ><Button className="botton" >新增單字</Button></NavLink>:null} 
-            {isLogin?<NavLink to={{pathname:"/User", state:{id:100, name:userName, email:userEmail,isLogined:isLogin}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> :null}
+            {isLogin?<NavLink to={{pathname:"/add", state:{ email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null} 
+            {isLogin?<NavLink to={{pathname:"/user", state:{id:100, name:userName, email:userEmail,isLogined:isLogin}}}><Button className="botton">應該會變成使用者名稱</Button></NavLink> :null}
             <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
           </Space>
         </div>

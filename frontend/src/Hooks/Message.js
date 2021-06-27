@@ -1,6 +1,6 @@
 import {  message } from 'antd';
 
-const Message = ({status, msg})=>{
+export default function Message({status, msg}){
     switch(status){
         case "success":
             message.success(msg);
@@ -14,6 +14,4 @@ const Message = ({status, msg})=>{
         default:
             break
     }
-}
-
-export default Message;
+};

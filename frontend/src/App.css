@@ -46,13 +46,13 @@
 .header .row-title-bottons .botton{
   /* background-color: #4CAF50; */
   border: none;
-  color: white;
+  color: aliceblue;
   /* padding: 15px 32px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  /* font-size: 16px; */
-  /* margin: 4px 2px; */
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
 }
 .header .row-title-bottons .botton:hover{
@@ -176,32 +176,27 @@
 }
 
 .add-close {
-  height: 4rem;
+  text-align: right;
   width: 100%;
   display: inline-block;
 }
 
-.add-close .botton-place{
-  text-align: right top;
-  width: 4rem;
-  height: 4rem;
-  position: absolute;
-  right: 2rem;
-  top: 1rem;
+.add-close .botton{
+  margin-top: 1.2rem;
+  margin-right: 3rem;
+  color:aliceblue;
+  background-color: #534b48;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.add-close .botton{
-  text-align: right top;
-  width: 3.4rem;
-  height: 3.4rem;
-  color: #534b48;
-  position: absolute;
-  right: 0;
-  top: 0;
+.add-close .botton:hover{
+  color:aliceblue;
+  background-color: #636262;
 }
 
 .add-title {
-  margin-top: 1rem; 
+  /* margin-top: 1rem;  */
   margin-bottom: 2rem;  
   text-align: center;
   /* text-transform: uppercase; */
