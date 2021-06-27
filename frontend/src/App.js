@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect } from "react";
 import {useState} from 'react';
-import { NavLink, Switch, Route, BrowserRouter, Redirect, Link, history} from "react-router-dom";
+import { NavLink, Switch, Route, BrowserRouter, Redirect, Link, useLocation} from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -23,8 +23,8 @@ function App() {
   const [userName, setuserName]=useState("");
   const [userEmail, setuserEmail]=useState("");
   const [userpenName, setuserpenName]=useState(undefined);
+  const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
-
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
 		setuserName(profile.getName());
@@ -66,22 +66,24 @@ function App() {
             </div>
           </div>
           <div className="row-bar" >
-            <Input.Search
-              style={{ width: "100%"}} 
-              placeholder="親愛的網友，想探聽點什麼？"
-              allowClear
-              enterButton="搜尋"
-              size="large"
-              onSearch={(term)=>{
-				console.log(term);
-				let path="/define/"+term;
-				console.log(path);
-				console.log(typeof(Location));
-				// history.push(path);
-				<Redirect to={path} />;
-              	// windows.location.href=windows.location.href.replace("/","/term/"+term);
-              }}
-            />
+            <Route render={({history})=>(
+              <Input.Search
+                style={{ width: "100%"}} 
+                placeholder="嗨？"
+                allowClear
+                enterButton="搜尋"
+                size="large"
+                value={searchWord}
+                onChange={(e)=>{
+                  setSearchWord(e.target.value);
+                }}
+                onSearch={(term)=>{
+          				let path="/define/"+term;
+          				history.push(path);
+                  setSearchWord("");
+                }}
+              ></Input.Search>
+            )}/>
           </div>
         </div>
           <Switch>
@@ -90,7 +92,7 @@ function App() {
             <Route exact={false} path="/define/:term?" component={Define} />
             <Route exact={true} path="/add" component={Add} />
             <Route exact={true} path="/add/notLogin" component={NotLogin}/>
-			<Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
+            <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
             <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/author" component={Author} />
             <Redirect exact={true} from="/home" to="/" />
