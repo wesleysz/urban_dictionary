@@ -25,7 +25,36 @@ const MUT_MODIFY_PEN_NAME=gql`mutation ModifyPen($email: String!, $pen:String!){
   }`
   ;
 
-const MUT_CREATE_POST="";
+const MUT_CREATE_POST = gql`
+	mutation createPost(
+		$email: String!
+		$vocabulary: String!
+		$explanation: String!
+		$example: String!
+		$tags: [String]
+	){
+		createPost(
+			email: $email
+			vocabulary: $vocabulary
+			explanation: $explanation
+			example: $example
+			tags: $tags
+		){
+			_id
+			# author{
+			# 	penName
+			# }
+			vocabulary
+			explanation
+			example
+			tags
+			if_publish
+			agree_users
+			disagree_users
+			create_date
+		}
+	}
+`;
 
 const MUT_MODIFY_POST="";
 

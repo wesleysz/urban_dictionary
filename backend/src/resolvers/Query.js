@@ -5,7 +5,7 @@ const Query = {
         }
 
         const res =  await db.PostModel.find( 
-            { vocabulary: { $regex: new RegExp(str, "i")}} //test upper lower case
+            { vocabulary: { $regex: new RegExp(str, "i")}, if_publish: true} //test upper lower case
         );
         return res
     },
@@ -13,7 +13,7 @@ const Query = {
     async queryByUser( parent, {penName}, { db }, info ){
         const author_id = await db.UserModel.findOne({penName: penName})
         const res =  await db.PostModel.find( 
-            { author: author_id} //test upper lower case
+            { author: author_id, if_publish: true} //test upper lower case
         );
         return res
     },
@@ -23,7 +23,7 @@ const Query = {
             return []
         }
         const res =  await db.PostModel.find( 
-            { vocabulary: {$regex: new RegExp('^' + vocabulary+'$', 'i')} }
+            { vocabulary: {$regex: new RegExp('^' + vocabulary+'$', 'i')}, if_publish: true }
             // { vocabulary: new RegExp(vocabulary, "i")} //test upper lower case
         );
         return res
@@ -31,7 +31,10 @@ const Query = {
 
     async randomFivePosts( parent, args, { db }, info ){
 
-        return await db.PostModel.aggregate([{ $sample: { size: 5 } }])
+        return await db.PostModel.aggregate([
+            { $match: { if_publish: true } },
+            { $sample: { size: 5 } }
+        ])
     }
 };
 

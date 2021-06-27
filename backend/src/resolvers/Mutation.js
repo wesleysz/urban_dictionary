@@ -12,6 +12,9 @@ const Mutation = {
 
     // 拿到 email，檢查筆名沒重複，改筆名，成功回傳 true，否則 false。
     async modifyPenName(parent, {email, penName}, { db }, info) {
+        if(penName.length === 0){
+            return {success:false, message:'Pen name cannot be null.'}
+        }
         const duplicate = await db.UserModel.findOne({penName:penName})
         if(!duplicate){
             try {
