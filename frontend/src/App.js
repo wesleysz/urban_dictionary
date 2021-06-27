@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect } from "react";
 import {useState} from 'react';
-import { NavLink, Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import { NavLink, Switch, Route, BrowserRouter, Redirect, Link, history} from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -72,8 +72,10 @@ function App() {
               size="large"
               onSearch={(term)=>{
 				console.log(term);
-				let path="/term/"+term;
+				let path="/define/"+term;
 				console.log(path);
+				console.log(typeof(Location));
+				// history.push(path);
 				<Redirect to={path} />;
               	// windows.location.href=windows.location.href.replace("/","/term/"+term);
               }}

@@ -29,7 +29,8 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 				</Button>
 			</div>
 			<div className="card-footer" > 
-				<div className="text"> 由 {author.penName} 創建於 {create_date}</div>
+				<div className="text">由 {author.penName}</div>
+				<div className="text">創建於 {create_date}</div>
 			</div>
 		</div>
 	);

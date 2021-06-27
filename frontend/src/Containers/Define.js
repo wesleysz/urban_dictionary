@@ -7,7 +7,7 @@ import {QUE_QUERY_BY_VOCABULARY} from "../graphql/index";
 const Define=(props)=>{
 	console.log(props.match.params.term);
 	let list=[];
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: props.match.params.term}});
+	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: props.match.params.term},fetchPolicy: "cache-and-network"});
 	console.log("data",data);
 	console.log("error",error);
 	console.log("loading",loading);
