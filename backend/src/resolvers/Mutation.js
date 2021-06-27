@@ -13,7 +13,7 @@ const Mutation = {
     // 拿到 email，檢查筆名沒重複，改筆名，成功回傳 true，否則 false。
     async modifyPenName(parent, {email, penName}, { db }, info) {
         if(penName.length === 0){
-            return {success:false, message:'Pen name cannot be null.'}
+            return {success:false, message:'筆名不可以為空'}
         }
         const duplicate = await db.UserModel.findOne({penName:penName})
         if(!duplicate){
@@ -24,17 +24,17 @@ const Mutation = {
                 );
                 console.log("res:", res)
                 if(res["nModified"] === 1){
-                    return {success:true, message:'Successfully modified.'}
+                    return {success:true, message:'成功更改！'}
                 }
                 else{
-                    return {success:false, message:'Email account does not exist.'}
+                    return {success:false, message:'Email帳號不存在'}
                 }
             } catch (e) {
                 return {success:false, message:'DB error.'}
             }
         }
         else{
-            return {success:false, message:'Duplicate pen name.'}
+            return {success:false, message:'這個筆名已經有人用過了，換一個吧~'}
         }
     },
 
