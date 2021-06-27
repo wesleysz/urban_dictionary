@@ -56,8 +56,8 @@ class GoogleBtn extends Component {
           onLogoutSuccess={ this.props.logout }
           onFailure={ this.handleLogoutFailure }
           style={{backgroundColor:"transparent"}}
-        >
-        </GoogleLogout></NavLink>: <GoogleLogin
+        />
+        </NavLink>: <GoogleLogin
           clientId={ CLIENT_ID }
           buttonText='以GOOGLE登入'
           onSuccess={ this.props.login }
