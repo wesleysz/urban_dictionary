@@ -1,15 +1,17 @@
 import React from 'react';
+import '../App.css';
 import {Typography} from '@material-ui/core';
 import {ThumbUp, ThumbDown} from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
 
-const Card=({vocalbulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
+const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
 	let pen=(author.penName)?author.penName:author.name;
+	console.log(vocabulary);
 	return (
 		<div className="card">
 			<div className="tags">#tag1 #tag2</div>
 			<div className="vocab">
-				<a className="word">{vocalbulary}</a>
+				<a className="word">{vocabulary}</a>
 			</div>
 			<div className="meaning">{explanation}</div>
 			<div className="example">{example}</div>

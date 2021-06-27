@@ -26,24 +26,23 @@ const QUE_QUERY_BY_VOCABULARY=gql`
 `;
 
 const QUE_QUERY_BY_USER="";
+
 const QUE_RANDOM_FIVE_POSTS=gql`
 	query randomFivePosts($number: Int){
 		randomFivePosts(number: $number){
-			post{
+			_id,
+			author{
 				_id,
-				author{
-					_id,
-					name,
-					penName
-				},
-				vocabulary,
-				explanation,
-				example,
-				tags,
-				agree_users,
-				disagree_users,
-				create_date
-			}
+				name,
+				penName
+			},
+			vocabulary,
+			explanation,
+			example,
+			tags,
+			agree_users,
+			disagree_users,
+			create_date
 		}
 	}
 `;
