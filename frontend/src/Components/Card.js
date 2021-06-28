@@ -31,14 +31,18 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 		}
 	}
 
-	let vocabLink="/define/"+vocabulary;
-	let authorLink="/author/"+author.penName;
+	const vocabLink="/define/"+vocabulary;
+	const authorLink="/author/"+author.penName;
+	const modifyLink="/user/modify/"+post_id;
 	// const check = useLocation();
 	// console.log("check",check);
 	return (
 		<div className="card">
 			{published!==null?
-			<div className="tags"><PublishBtn Published={published} id={post_id}/></div>
+			<div className="tags">
+			 	<NavLink to={modifyLink}><Button>修改內容</Button></NavLink>{' '}
+				<PublishBtn Published={published} id={post_id}/>
+			</div>
 			:null
 			}
 			<div className="vocab">

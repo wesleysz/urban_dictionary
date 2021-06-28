@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useQuery } from '@apollo/react-hooks'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Cards from "../Containers/Cards";
 import { QUE_QUERY_BY_USER } from "../graphql";
-import {UserInfo} from '../App';
+import { UserInfo } from '../App';
 
 const Author=()=>{
 	const [List, setList] = useState([]);

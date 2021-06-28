@@ -56,7 +56,20 @@ const MUT_CREATE_POST = gql`
 	}
 `;
 
-const MUT_MODIFY_POST="";
+const MUT_MODIFY_POST=gql`
+mutation ModifyPost($id:ID!, $vocab:String, $explan:String ,$example:String ){
+	modifyPost(
+	  	post_id:$id
+	  	vocabulary: $vocab
+		explanation: $explan
+		example: $example
+	){
+		success
+		message
+	}
+  }
+  
+`;
 
 const MUT_UNPUBLISH_POST=gql`
 mutation UnpublishPost($ptid : String!){

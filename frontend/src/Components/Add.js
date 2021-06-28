@@ -2,10 +2,10 @@ import { useState, useContext } from "react";
 import { NavLink, Redirect,  useLocation, useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
-import {MUT_CREATE_POST} from '../graphql';
-import {IconButton, Button} from '@material-ui/core';
-import {Input} from 'antd';
-import {UserInfo} from '../App'
+import { MUT_CREATE_POST } from '../graphql';
+import { Button } from '@material-ui/core';
+import { Input } from 'antd';
+import { UserInfo } from '../App'
 
 const Add = ()=>{
 	const [vocab, setVocab] = useState("");

@@ -10,6 +10,7 @@ import User from "./Containers/User";
 import Home from "./Containers/Home";
 import Author from "./Containers/Author";
 import Define from "./Containers/Define";
+import Modify from './Containers/Modify';
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
 import Message from './Hooks/Message';
@@ -115,6 +116,8 @@ function App() {
               <Route exact={true} path="/" component={Home} />
               <Route exact={true} path="/author" component={Author} />
               <Route exact={false} path="/author/:penname?" component={Author} />
+              <Route exact={true} path="/user" component={Modify} />
+              <Route exact={false} path="/user/:postid?" component={Modify} />
               <Redirect exact={true} from="/home" to="/" />
             </Switch>
           <div className="footer" />

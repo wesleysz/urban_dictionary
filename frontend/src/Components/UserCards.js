@@ -24,7 +24,7 @@ const UserCards=()=>{
 	if( loading || !data ){
 		return(
 			<div className="title">
-				你目前定義過的單字：
+				你目前定義過的字詞：
 				<div className="footer" style={{height:"2rem"}}/>
 				<p>載入中...</p>
 			</div>
@@ -32,7 +32,7 @@ const UserCards=()=>{
 	}
 	return(
 		<div className="title">
-			你目前定義過的單字：
+			你目前定義過的字詞：
 			<div className="footer" style={{height:"2rem"}}/>
 			<Cards data={data.queryMyPost} />
 		</div>

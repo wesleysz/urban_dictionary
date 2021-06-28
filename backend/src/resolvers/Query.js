@@ -71,7 +71,7 @@ const Query = {
     },
 
     async queryById(parent,{id},{db},info){
-        return await db.PostModel.find({_id: id});
+        return await db.PostModel.findOne({_id: id});
     },
 };
 
