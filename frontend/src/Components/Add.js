@@ -107,7 +107,7 @@ const Add = ()=>{
 	}
 	console.log("vocab",vocab);
 	console.log("check.state.wordToBeDefine",check.state.wordToBeDefine);
-	if(vocab!==check.state.wordToBeDefine){
+	if(vocab!==check.state.wordToBeDefine && check.state.wordToBeDefine!==undefined){
 		setVocab(check.state.wordToBeDefine);
 	}
 

@@ -58,9 +58,27 @@ const MUT_CREATE_POST = gql`
 
 const MUT_MODIFY_POST="";
 
-const MUT_UNPUBLISH_POST="";
+const MUT_UNPUBLISH_POST=gql`
+mutation UnpublishPost($ptid : String!){
+	unpublishPost(
+	  post_id : $ptid
+	){
+	  success
+	  message
+	}
+  }
+  `;
 
-const MUT_PUBLISH_POST="";
+const MUT_PUBLISH_POST=gql`
+mutation PublishPost($ptid : String!){
+	publishPost(
+	  post_id : $ptid
+	){
+	  success
+	  message
+	}
+  }
+  `;
 
 const MUT_ADD_AGREE=gql`
 	mutation addAgree(

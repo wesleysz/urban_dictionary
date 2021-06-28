@@ -21,7 +21,6 @@ const Cards=({data, email})=>{
 		console.log(i,data[i].if_publish)
 		list.push(
 			<Card 
-				post_id={data[i]._id}
 				vocabulary={data[i].vocabulary}
 				author={data[i].author}
 				explanation={data[i].explanation}
@@ -31,8 +30,9 @@ const Cards=({data, email})=>{
 				disagree_users={data[i].disagree_users}
 				create_date={data[i].create_date}
 				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
-				key={i}
 				user_email={email}
+				post_id={data[i]._id}
+				key={data[i]._id}
 			/>
 		);
 	}

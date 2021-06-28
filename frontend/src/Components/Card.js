@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import '../App.css';
-import {Typography} from '@material-ui/core';
-import {ThumbUp, ThumbDown} from '@material-ui/icons';
+import PublishBtn from './PublisheBtn';
+import { Typography } from '@material-ui/core';
+import { ThumbUp, ThumbDown } from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
 import { NavLink} from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
@@ -33,7 +34,7 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 	return (
 		<div className="card">
 			{published!==null?
-			<div className="tags"><Button>{published?"點我下架":"點我發布"}</Button></div>
+			<div className="tags"><PublishBtn Published={published} id={post_id}/></div>
 			:null
 			}
 			<div className="vocab">
