@@ -4,7 +4,7 @@ import {useQuery} from '@apollo/react-hooks'
 import {QUE_QUERY_MY_POST } from "../graphql"
 import {UserInfo} from '../App'
 
-const UserCards=(eMail)=>{
+const UserCards=()=>{
 	const userInfo = useContext(UserInfo);
 	// const [List, setList] = useState([]);
 	// console.log("eMail",eMail.eMail);
@@ -21,7 +21,7 @@ const UserCards=(eMail)=>{
 	// console.log("data",data);
 	// console.log("error",error);
 	// console.log("loading",loading);
-	if(!data){
+	if( loading || !data ){
 		return(
 			<div className="title">
 				你目前定義過的單字：

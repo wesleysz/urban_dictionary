@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { useState, useEffect, useContext } from 'react';
 import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom";
-import {Input} from 'antd';
+import { Input } from 'antd';
 import { Button } from '@material-ui/core';
-import { useMutation,useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN,QUE_QUERY_BY_USER } from "../graphql"
 import Message from '../Hooks/Message';
 import UserCards from "../Components/UserCards";
-import {UserInfo} from '../App'
+import { UserInfo } from '../App'
 
-function User ({afunction,hi}){
+function User ({afunction}){
 	const userInfo = useContext(UserInfo);
 	console.log(userInfo);
 
