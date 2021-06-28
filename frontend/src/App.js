@@ -73,7 +73,7 @@ function App() {
           <div className="row-bar" >
             <Route render={({history})=>(
               <Input.Search
-                style={{ width: "100%"}} 
+                className="search-bar"
                 placeholder="嗨？"
                 allowClear
                 enterButton="搜尋"
