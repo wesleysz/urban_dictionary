@@ -3,14 +3,19 @@ import '../App.css';
 import {Typography} from '@material-ui/core';
 import {ThumbUp, ThumbDown} from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
+import { NavLink} from "react-router-dom";
+
 
 const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
+	let vocabLink="/define/"+vocabulary;
 	return (
 		<div className="card">
 			{/*<div className="tags">#tag1 #tag2</div>*/}
+			<NavLink to={vocabLink}>
 			<div className="vocab">
 				<a className="word">{vocabulary}</a>
 			</div>
+			</NavLink>
 			<div className="meaning">釋義：{explanation}</div>
 			<div className="example">例句：{example}</div>
 			<div className="author"> </div>
