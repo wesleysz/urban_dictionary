@@ -1,6 +1,12 @@
-import './App.css';
-import React, { useState, createContext, useContext } from 'react';
+import "./App.css";
+import React, { useState, createContext, useContext } from "react";
 import { NavLink, Switch, Route, BrowserRouter, Redirect, useHistory } from "react-router-dom";
+import { MUT_USER_LOGIN } from "./graphql";
+import { Button } from "@material-ui/core";
+import { useMutation } from "@apollo/react-hooks";
+import { Space, Input, AutoComplete } from "antd";
+import { QUE_QUERY_BY_STRING } from "./graphql";
+
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -11,49 +17,44 @@ import Home from "./Containers/Home";
 import Author from "./Containers/Author";
 import Define from "./Containers/Define";
 import Modify from './Containers/Modify';
-import GoogleBtn from "./Components/GoogleBtn"
+import GoogleBtn from "./Components/GoogleBtn";
 import icon from "./imgs/icon.png";
-import Message from './Hooks/Message';
-import { MUT_USER_LOGIN } from "./graphql"
-import { Button } from '@material-ui/core';
-import { useMutation } from '@apollo/react-hooks';
-import { Space, Input, AutoComplete } from 'antd';
-import { QUE_QUERY_BY_STRING } from "./graphql";
+import Message from "./Hooks/Message";
 
 export const UserInfo = createContext();
+
 function App() {
-  const [startLogin] = useMutation(MUT_USER_LOGIN)
+  const [startLogin] = useMutation(MUT_USER_LOGIN);
   const [userName, setuserName]=useState(undefined);
   const [userEmail, setuserEmail]=useState(undefined);
   const [imageUrl,setImageUrl]=useState("");
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
-  const [option, setOption]=useState([]);
   const [hideInput, setHideInput] = useState(false);
 
-	const  login = async (googleUser) =>{
+	const login = async (googleUser) => {
 		const profile = googleUser.getBasicProfile();
 		setuserName(profile.getName());
 		setuserEmail(profile.getEmail());
     setImageUrl(profile.getImageUrl());
 		setisLogin(true);
-    const {data} = await startLogin({variables:{name:profile.getName(), email:profile.getEmail()}})
+    const {data} = await startLogin({ variables: { name: profile.getName(), email: profile.getEmail() } });
     setuserpenName(data.userLogin.penName);
   }
 
-	const logout =  () => {
+	const logout = () => {
 		setuserName("");
     setuserEmail("");
 		setisLogin(false);
     setuserpenName(undefined);
-    Message({status: "success", msg: "登出成功！"});
+    Message({ status: "success", msg: "登出成功！" });
     <Redirect exact={true} from="/user" to="/home" />
 	}
 
   const queryAgain = async () => {
-		const {data} = await startLogin({variables:{name:userName, email:userEmail}})
-    setuserpenName(data.userLogin.penName)
+		const {data} = await startLogin({ variables: { name: userName, email: userEmail } });
+    setuserpenName(data.userLogin.penName);
 	}
 
   // const searchResult=(value)=>
