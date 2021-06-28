@@ -32,7 +32,7 @@ const UserCards=(eMail)=>{
 		<div className="title">
 			你目前定義過的單字：
 			<div className="footer" style={{height:"2rem"}}/>
-			<Cards data={List}/>
+			<Cards data={List} email={eMail}/>
 		</div>
 	)
 }

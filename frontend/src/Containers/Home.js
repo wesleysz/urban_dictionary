@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Cards from "../Containers/Cards";
 import { useQuery } from '@apollo/react-hooks'
 import { QUE_RANDOM_FIVE_POSTS } from "../graphql";
+import {useLocation } from "react-router-dom";
+
 
 const Home=()=>{
 	const [List, setList] = useState([]);
 	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}, fetchPolicy: "cache-and-network"});
+	const check = useLocation();
 	useEffect(()=>{
 		if(data) setList(data.randomFivePosts);
 		return(()=>{
@@ -26,7 +29,11 @@ const Home=()=>{
 		<div id="content">
 			{/* <div className="footer" /> */}
 			<p id="general-title">你可能會想知道：</p>
-			<Cards data={List}/>
+			{check.state?
+				<Cards data={List} email={check.state.email}/>
+				:
+				<Cards data={List}/>
+			}
 		</div>
 	)
 }

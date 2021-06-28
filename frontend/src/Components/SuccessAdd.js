@@ -13,7 +13,7 @@ const SuccessAdd = ()=>{
 	return(
 		<div className="add">
 			<div className="add-close">
-				<NavLink to="/home">
+				<NavLink to={{pathname:"/home", state:{ email: email}}}>
 					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 				</NavLink>
 			</div>

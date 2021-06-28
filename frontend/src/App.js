@@ -33,7 +33,8 @@ function App() {
     setImageUrl(profile.getImageUrl());
 		setisLogin(true);
     const {data} = await startLogin({variables:{name:profile.getName(), email:profile.getEmail()}})
-    setuserpenName(data.userLogin.penName)
+    setuserpenName(data.userLogin.penName);
+    <Redirect exact={true}  to="/home" />
   }
 
 	const logout =  () => {
@@ -42,7 +43,7 @@ function App() {
 		setisLogin(false);
     setuserpenName(undefined);
     Message({status: "success", msg: "登出成功！"});
-    <Redirect exact={true} from="/user" to="/" />
+    <Redirect exact={true} from="/user" to="/home" />
 	}
 
   const queryAgain = async () => {
@@ -57,7 +58,7 @@ function App() {
         <div className="header">
           <div className="row-title">
             <button className="homeBtn">
-              <NavLink className="homeBtn" to="/home"><img id="icon" src={icon} /></NavLink>
+              <NavLink className="homeBtn" to={{pathname:"/home", state:{ email: (isLogin? userEmail:null)}}}><img id="icon" src={icon} /></NavLink>
             </button>
             <div className="row-title-bottons" >
               <Space size={18}>
@@ -73,7 +74,6 @@ function App() {
               <Input.Search
                 className="search-bar"
                 placeholder="嗨？ 想找甚麼ㄋ？"
-                allowClear
                 enterButton="搜尋"
                 size="large"
                 value={searchWord}

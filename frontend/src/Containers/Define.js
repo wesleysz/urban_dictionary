@@ -34,15 +34,30 @@ const Define=()=>{
 		return(
 			<div className="cant-find">
 				<p id="general-title">ㄟ(￣▽￣ㄟ) 找不到 找不到 (ㄏ￣▽￣)ㄏ   </p>
-				<NavLink to={{pathname:"/add", state:{ pen:check.state.pen,name:check.state.name,email:check.state.email,wordToBeDefine:term}}}><button className="botton">來去定義{term}</button></NavLink>
+				{check.state?
+					(check.state.pen?
+						(<NavLink to={{pathname:"/add", state:{ pen:check.state.pen,name:check.state.name,email:check.state.email,wordToBeDefine:term}}}>
+							<button className="botton">來去定義{term}</button>
+						</NavLink>):
+						(<NavLink to={{pathname:"/add", state:{name:check.state.name,email:check.state.email,wordToBeDefine:term}}}>
+							<button className="botton">來去定義{term}</button>
+						</NavLink>)
+					):(
+					<NavLink to={{pathname:"/add", state:{ wordToBeDefine:term}}}><button className="botton">來去定義{term}</button></NavLink>
+					)
+				}
 			</div>
 		)
 	}
 	return(
 		<div id="content">
-			{/* <div className="footer" /> */}
 			<p id="general-title">{term}的相關結果：</p>
-			<Cards data={List} />
+			{check.state?
+				<Cards data={List} email={check.state.email}/>
+				:
+				<Cards data={List} />
+			}
+			
 		</div>
 	)
 };

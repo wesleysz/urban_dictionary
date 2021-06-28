@@ -1,10 +1,9 @@
 import React from 'react';
 import {useQuery,useLazyQuery} from '@apollo/react-hooks'
-
 import Card from "../Components/Card";
 
 
-const Cards=({data})=>{
+const Cards=({data, email})=>{
 	if(!data.length){
 		return(
 			<div><p id="general-title">σ`∀´)σㄇ有東東</p></div>
@@ -22,6 +21,7 @@ const Cards=({data})=>{
 		console.log(i,data[i].if_publish)
 		list.push(
 			<Card 
+				post_id={data[i]._id}
 				vocabulary={data[i].vocabulary}
 				author={data[i].author}
 				explanation={data[i].explanation}
@@ -32,6 +32,7 @@ const Cards=({data})=>{
 				create_date={data[i].create_date}
 				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
 				key={i}
+				user_email={email}
 			/>
 		);
 	}

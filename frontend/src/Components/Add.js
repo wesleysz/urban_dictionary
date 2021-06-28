@@ -21,13 +21,18 @@ const Add = ()=>{
 			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
 		)
 	}
+	if(check.state.email.length === 0){
+		return(
+			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
+		)
+	}
 	console.log("[Add]", check.state.email, check.state.name, check.state.pen)
 
 	if(!check.state.pen){
 		return(
 			<div className="add">
 				<div className="add-close">
-					<NavLink to="/home">
+					<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
 						<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 					</NavLink>
 				</div>
@@ -109,7 +114,7 @@ const Add = ()=>{
 	return(
 		<div className="add">
 			<div className="add-close">
-				<NavLink to="/home">
+				<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
 					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 				</NavLink>
 			</div>

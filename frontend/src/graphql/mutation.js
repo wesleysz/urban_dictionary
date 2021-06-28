@@ -62,7 +62,21 @@ const MUT_UNPUBLISH_POST="";
 
 const MUT_PUBLISH_POST="";
 
-const MUT_ADD_AGREE="";
+const MUT_ADD_AGREE=gql`
+	mutation addAgree(
+		$post_id: String!
+		$email: String!
+	){
+		addAgree(
+			post_id: $post_id
+			email: $email
+		){
+			success
+			agree_cnt
+			disagree_cnt
+		}
+	}
+`;
 
 const MUT_ADD_DISAGREE="";
 
