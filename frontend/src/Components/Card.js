@@ -4,10 +4,11 @@ import PublishBtn from './PublisheBtn';
 import { Typography } from '@material-ui/core';
 import { ThumbUp, ThumbDown } from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
-import { NavLink} from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import {MUT_ADD_AGREE} from '../graphql';
 import Message from '../Hooks/Message';
+
 
 const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date,published, user_email})=>{
 	const [add_agree] = useMutation(MUT_ADD_AGREE)
@@ -31,6 +32,8 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 
 	let vocabLink="/define/"+vocabulary;
 	let authorLink="/author/"+author.penName;
+	const check = useLocation();
+	console.log("check",check);
 	return (
 		<div className="card">
 			{published!==null?
@@ -38,7 +41,7 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 			:null
 			}
 			<div className="vocab">
-				<p className="word"><NavLink to={vocabLink}>{vocabulary}</NavLink></p>
+				<p className="word"><NavLink to={{pathname: vocabLink, }}>{vocabulary}</NavLink></p>
 			</div>
 			<div className="meaning">釋義：{explanation}</div>
 			<div className="example">例句：{example}</div>
