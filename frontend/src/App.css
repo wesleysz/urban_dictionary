@@ -123,7 +123,7 @@
   align-items: center; 
   margin: auto;
   background-color: #d7f8fd;
-  margin-top: 2.4rem; 
+  margin-bottom: 2.4rem; 
   padding: 1.4rem;
   color: #333333;
   box-shadow: 1px 1px 2px #a9aaaa;
@@ -188,8 +188,16 @@
 }
 
 .footer {
-  height: 5rem;
+  height: 3rem;
   width: auto;
+}
+
+.loading{
+  margin-top: 1rem;
+  color: #f6f9fa;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 /* Add Page */
@@ -294,6 +302,15 @@
   margin-top: 2.8rem;
   color: #14316e;
   font-size: 24px;
+  font-weight: 600;
+}
+
+#user .component .if_publish{
+  /* text-align: left; */
+  margin-bottom: 0rem;  
+  /* margin-top: 2.8rem; */
+  color: #14316e;
+  font-size: 18px;
   font-weight: 600;
 }
 

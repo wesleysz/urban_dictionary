@@ -13,18 +13,28 @@ const Cards=({data})=>{
 	let list=[];
 	let num=data.length;
 	for(let i=0;i < num;i++){
-		list.push(<Card 
-			vocabulary={data[i].vocabulary}
-			author={data[i].author}
-			explanation={data[i].explanation}
-			example={data[i].example}
-			tags={data[i].tags}
-			agree_users={data[i].agree_users}
-			disagree_users={data[i].disagree_users}
-			create_date={data[i].create_date}
-			key={i}
-		/>);
+		// if(data[i].if_publish){ 
+		// 	list.push(<p className="if_publish">(已發佈)</p>)
+		// }
+		// else{
+		// 	list.push(<p className="if_publish">(未發佈)</p>)
+		// }
+
+		list.push(
+			<Card 
+				vocabulary={data[i].vocabulary}
+				author={data[i].author}
+				explanation={data[i].explanation}
+				example={data[i].example}
+				tags={data[i].tags}
+				agree_users={data[i].agree_users}
+				disagree_users={data[i].disagree_users}
+				create_date={data[i].create_date}
+				key={i}
+			/>
+		);
 	}
+	console.log()
 	return (
 		<div>
 			{list}

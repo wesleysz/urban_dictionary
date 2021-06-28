@@ -19,9 +19,6 @@ const NotLogin = ()=>{
                     <CallMadeIcon style={{color:"#cbdce7", height:"30px", width:"30px"}}></CallMadeIcon>
                 </p>
 			</div>
-			
-			
-			
 		</div>
 	);
 }

@@ -24,10 +24,25 @@ const Add = ()=>{
 	}
 	if(!check.state.pen){
 		return(
-			<div className="add-title">
-				你ㄇ有筆名耶
-				<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
+			<div className="add">
+				<div className="add-close">
+					<NavLink to="/home">
+						<Button variant="contained" color="primary" className="botton" >回首頁</Button>
+					</NavLink>
+				</div>
+				<div className="add-title" style={{marginTop:"5rem"}}>
+					<p>你還ㄇ有筆名ㄝ！</p>
+					<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}>
+						{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
+						<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
+					</NavLink>
+					
+				</div>
 			</div>
+			// <div className="add-title">
+			// 	你ㄇ有筆名耶
+			// 	<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
+			// </div>
 		)
 	}
 	const {email} = check.state;

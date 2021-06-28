@@ -21,12 +21,13 @@ const Define=(props)=>{
 	if(!data){
 		return(
 			<div id="content">
-				<p>loading...</p>
+				<p className="loading">loading...</p>
 			</div>
 		)
 	}
 	return(
 		<div id="content">
+			<div className="footer" />
 			<Cards data={data.queryByVocabulary}/>
 		</div>
 	)
