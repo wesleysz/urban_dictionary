@@ -11,7 +11,7 @@ const Author=()=>{
 
 	// const check = useLocation();
 	const userInfo = useContext(UserInfo);
-	console.log("[User] UserInfo", userInfo);
+	userInfo.setHideInput(false);
 
 	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: penName},fetchPolicy: "cache-and-network"});
 

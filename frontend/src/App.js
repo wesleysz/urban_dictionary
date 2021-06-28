@@ -28,6 +28,7 @@ function App() {
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
+  const [hideInput, setHideInput] = useState(false);
 
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
@@ -57,7 +58,7 @@ function App() {
 
   return (
 		<BrowserRouter>
-      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName, setPenName:setuserpenName}}>
+      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName, setPenName:setuserpenName, setHideInput}}>
         <div className="background">
           <div className="header">
             <div className="row-title">
@@ -73,36 +74,40 @@ function App() {
                 </Space>
               </div>
             </div>
-            <div className="row-bar" >
-              <Route render={({history})=>(
-                <Input.Search
-                  className="search-bar"
-                  placeholder="嗨？ 想找甚麼ㄋ？"
-                  enterButton="搜尋"
-                  size="large"
-                  value={searchWord}
-                  onChange={(e)=>{
-                    setSearchWord(e.target.value);
-                  }}
-                  onSearch={(term)=>{
-                    if(term.length===0){
-                      Message({status:'warning', msg:"請輸入搜尋內容！"})
-                      return;
-                    }
-                    const path="/define/"+term;
-                    history.push({
-                      pathname: path,
-                      state: {
-                        pen: userpenName,
-                        name: userName,
-                        email: userEmail
+            {hideInput?
+              <></> :
+              <div className="row-bar" >
+                <Route render={({history})=>(
+                  <Input.Search
+                    className="search-bar"
+                    placeholder="嗨？ 想找甚麼ㄋ？"
+                    enterButton="搜尋"
+                    size="large"
+                    value={searchWord}
+                    onChange={(e)=>{
+                      setSearchWord(e.target.value);
+                    }}
+                    onSearch={(term)=>{
+                      if(term.length===0){
+                        Message({status:'warning', msg:"請輸入搜尋內容！"})
+                        return;
                       }
-                    });
-                    setSearchWord("");
-                  }}
-                ></Input.Search>
-              )}/>
-            </div>
+                      const path="/define/"+term;
+                      history.push({
+                        pathname: path,
+                        state: {
+                          pen: userpenName,
+                          name: userName,
+                          email: userEmail
+                        }
+                      });
+                      setSearchWord("");
+                    }}
+                  ></Input.Search>
+                )}/>
+              </div>
+            }
+            
           </div>
             <Switch>
               <Route exact={true} path="/login" component={LogIn} />

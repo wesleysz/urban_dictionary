@@ -43,6 +43,7 @@ const Query = {
                 vocabulary: vocabulary, 
                 if_publish: true
             })
+            // .sort({agree_users:-1})
             return res
         }
         else{

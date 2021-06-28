@@ -10,6 +10,8 @@ import { UserInfo } from '../App'
 const Modify = ()=>{
 	const { postid }= useParams();
     const userInfo = useContext(UserInfo);
+	userInfo.setHideInput(true);
+
     const { loading, error, data } = useQuery(QUE_QUERY_BY_ID,{variables: {id: postid},fetchPolicy: "cache-and-network"})
     const [modPost] = useMutation(MUT_MODIFY_POST);
     const [vocab, setVocab] = useState("");
