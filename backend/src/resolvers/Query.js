@@ -43,6 +43,7 @@ const Query = {
                 vocabulary: vocabulary, 
                 if_publish: true
             })
+            // .sort({agree_users:-1})
             return res
         }
         else{
@@ -71,7 +72,7 @@ const Query = {
     },
 
     async queryById(parent,{id},{db},info){
-        return await db.PostModel.find({_id: id});
+        return await db.PostModel.findOne({_id: id});
     },
 };
 

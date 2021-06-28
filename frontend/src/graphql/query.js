@@ -106,18 +106,13 @@ const QUE_QUERY_BY_ID=gql`
 		queryById(id: $id){
 			_id,
 			author{
-				_id,
-				name,
+				email
 				penName
 			},
-			if_publish,
 			vocabulary,
 			explanation,
 			example,
 			tags,
-			agree_users,
-			disagree_users,
-			create_date
 		}
 	}
 `;

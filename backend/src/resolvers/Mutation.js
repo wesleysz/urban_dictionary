@@ -83,14 +83,9 @@ const Mutation = {
                     { _id : post_id },
                     { $set: mutate }
                 );
-                if(res["nModified"] === 1){
-                    return {success:true, message:'Successfully modified.'}
-                }
-                else{
-                    return {success:false, message:'Post id does not exist.'}
-                }
+                return {success:true, message:'Successfully modified.'}
             } catch (e) {
-                return {success:false, message:'Post id does not exist.'}
+                return {success:false, message:'Post id 不存在'}
             }
         }
         else{

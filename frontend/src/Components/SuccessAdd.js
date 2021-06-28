@@ -5,6 +5,8 @@ import { useContext } from 'react';
 
 const SuccessAdd = ()=>{
 	const userInfo = useContext(UserInfo);
+	userInfo.setHideInput(true);
+
 	if(!userInfo.email){
 		return(
 			<Redirect exact={true} from="/add/success" to="/home" />

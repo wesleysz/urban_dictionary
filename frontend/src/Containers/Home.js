@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Cards from "../Containers/Cards";
 import { useQuery } from '@apollo/react-hooks'
 import { QUE_RANDOM_FIVE_POSTS } from "../graphql";
 import {useLocation } from "react-router-dom";
-
+import { UserInfo } from "../App";
 
 const Home=()=>{
 	const [List, setList] = useState([]);
+	const userInfo = useContext(UserInfo);
+	userInfo.setHideInput(false);
+	
 	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}, fetchPolicy: "cache-and-network"});
 	const check = useLocation();
 	useEffect(()=>{

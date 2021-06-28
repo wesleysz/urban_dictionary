@@ -10,6 +10,7 @@ import User from "./Containers/User";
 import Home from "./Containers/Home";
 import Author from "./Containers/Author";
 import Define from "./Containers/Define";
+import Modify from './Containers/Modify';
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
 import Message from './Hooks/Message';
@@ -29,6 +30,7 @@ function App() {
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
   const [option, setOption]=useState([]);
+  const [hideInput, setHideInput] = useState(false);
 
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
@@ -88,7 +90,7 @@ function App() {
 
   return (
 		<BrowserRouter>
-      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName, setPenName:setuserpenName}}>
+      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName, setPenName:setuserpenName, setHideInput}}>
         <div className="background">
           <div className="header">
             <div className="row-title">
@@ -104,12 +106,11 @@ function App() {
                 </Space>
               </div>
             </div>
-            <div className="row-bar" >
-              <Route render={({history})=>(
-                <AutoComplete
-                  options={option}
-                  onSearch={tryToSearch}
-                ><Input.Search
+            {hideInput?
+              <></> :
+              <div className="row-bar" >
+                <Route render={({history})=>(
+                  <Input.Search
                     className="search-bar"
                     placeholder="嗨？ 想找甚麼ㄋ？"
                     enterButton="搜尋"
@@ -135,10 +136,10 @@ function App() {
                       setSearchWord("");
                     }}
                   ></Input.Search>
-                </AutoComplete>
-              )}/>
+                )}/>
+              </div>
+            }
             </div>
-          </div>
             <Switch>
               <Route exact={true} path="/login" component={LogIn} />
               <Route exact={true} path="/define" component={Define} />
@@ -151,6 +152,8 @@ function App() {
               <Route exact={true} path="/" component={Home} />
               <Route exact={true} path="/author" component={Author} />
               <Route exact={false} path="/author/:penname?" component={Author} />
+              <Route exact={true} path="/user" component={Modify} />
+              <Route exact={false} path="/user/:postid?" component={Modify} />
               <Redirect exact={true} from="/home" to="/" />
             </Switch>
           <div className="footer" />
