@@ -55,7 +55,7 @@ function App() {
 
   return (
 		<BrowserRouter>
-      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName}}>
+      <UserInfo.Provider value={{name: userName, email: userEmail, penName:userpenName, setPenName:setuserpenName}}>
         <div className="background">
           <div className="header">
             <div className="row-title">

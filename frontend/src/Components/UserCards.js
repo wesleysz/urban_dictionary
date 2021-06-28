@@ -5,20 +5,20 @@ import {QUE_QUERY_MY_POST } from "../graphql"
 
 const UserCards=(eMail)=>{
 	const [List, setList] = useState([]);
-	console.log("eMail",eMail.eMail);
+	// console.log("eMail",eMail.eMail);
 	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "network-only"});
 
-	useEffect(()=>{
-		if(data) {setList(data.queryMyPost);
-		console.log(data.queryMyPost);}
-		return(()=>{
-			console.log('home unmouted')
-		})
-	},[data]);
+	// useEffect(()=>{
+	// 	if(data) {setList(data.queryMyPost);
+	// 	console.log(data.queryMyPost);}
+	// 	return(()=>{
+	// 		console.log('home unmouted')
+	// 	})
+	// },[data]);
 	
-	console.log("data",data);
-	console.log("error",error);
-	console.log("loading",loading);
+	// console.log("data",data);
+	// console.log("error",error);
+	// console.log("loading",loading);
 	if(!data){
 		return(
 			<div className="title">

@@ -11,27 +11,25 @@ import {UserInfo} from '../App'
 
 function User ({afunction,hi}){
 	const userInfo = useContext(UserInfo)
-	console.log("[User] UserInfo", userInfo)
 
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
-	const check = useLocation();
-	// console.log("check",check);
+
 	const [showMsg, setshowMsg]=useState(false);
 	const [Msg, setMsg]=useState('');
 	const [Pen, setPen]=useState('[你尚未設定筆名]');
 	const [changePenName, setChanegPenName]=useState(false);
 
-	useEffect(()=>{if(check.state && check.state.pen)setPen(check.state.pen); return(()=>{console.log("unmountede",hi)})},[check])
-	if(!check.state){
+	// useEffect(()=>{if(check.state && check.state.pen)setPen(check.state.pen); return(()=>{console.log("unmountede",hi)})},[check])
+	if(!userInfo.email){
 		return(
 			<Redirect exact={true} from="/user" to="/user/notLogin" />
 		)
 	}
-	const { name, email} = check.state;
+
 	return(
 		<>
 		<div className="add-close">
-			<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
+			<NavLink to={{pathname:"/home", state:{ email: userInfo.email}}}>
 				<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 			</NavLink>
 		</div>
@@ -39,7 +37,7 @@ function User ({afunction,hi}){
 			<div className="component" >
 				<div className="padding"/>
 					<div className="title">
-						{name}，你目前的筆名為"{Pen}"
+						{userInfo.name}，你目前的筆名為"{userInfo.penName}"
 					</div>
 				{changePenName?
 					<Input.Search
@@ -50,12 +48,13 @@ function User ({afunction,hi}){
 						enterButton="儲存"
 						size="medium"
 						onSearch={async (penName)=>{
-							const {data} = await startModPen({variables:{pen:penName, email:email}})
+							const {data} = await startModPen({variables:{pen:penName, email: userInfo.email}})
 							if(data.modifyPenName.success){
 								setPen(penName);
 								setChanegPenName(false);
 								setshowMsg(false);
 								Message({status:"success", msg:"成功更改筆名"})
+								userInfo.setPenName(penName)
 							}
 							else{
 								setMsg(data.modifyPenName.message)//success
@@ -72,7 +71,7 @@ function User ({afunction,hi}){
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
 				
 				{(Pen!=='[你尚未設定筆名]')?
-					<UserCards eMail={email} /> :
+					<UserCards /> :
 					null
 				}
 				<div className="padding"/>
