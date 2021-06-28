@@ -101,4 +101,25 @@ const QUE_QUERY_MY_POST=gql`
 	}
 `;
 
-export {QUE_QUERY_BY_STRING, QUE_QUERY_BY_VOCABULARY, QUE_QUERY_BY_USER, QUE_RANDOM_FIVE_POSTS, QUE_QUERY_MY_POST};
+const QUE_QUERY_BY_ID=gql`
+	query queryById($id: ID!){
+		queryById(id: $id){
+			_id,
+			author{
+				_id,
+				name,
+				penName
+			},
+			if_publish,
+			vocabulary,
+			explanation,
+			example,
+			tags,
+			agree_users,
+			disagree_users,
+			create_date
+		}
+	}
+`;
+
+export {QUE_QUERY_BY_STRING, QUE_QUERY_BY_VOCABULARY, QUE_QUERY_BY_USER, QUE_RANDOM_FIVE_POSTS, QUE_QUERY_MY_POST, QUE_QUERY_BY_ID };

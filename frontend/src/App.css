@@ -139,7 +139,6 @@
 }
 
 .card .vocab {
-  display: justify;
   padding-left: 1.4rem;
   margin-bottom: 2em;
   height: auto;
@@ -167,7 +166,6 @@
   font-weight: bold;
   text-align: left;
 }
-
 
 .card .card-footer{
   display: inline-block;

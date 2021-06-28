@@ -68,7 +68,11 @@ const Query = {
             { $match: { if_publish: true } },
             { $sample: { size: 5 } }
         ])
-    }
+    },
+
+    async queryById(parent,{id},{db},info){
+        return await db.PostModel.find({_id: id});
+    },
 };
 
 export default Query;
