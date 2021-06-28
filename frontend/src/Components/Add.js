@@ -139,6 +139,7 @@ const Add = ()=>{
 		if(vocab!==check.state.wordToBeDefine && check.state.wordToBeDefine!==undefined){
 			setVocab(check.state.wordToBeDefine);
 		}
+		check.state=null;
 	}
 
 	return(

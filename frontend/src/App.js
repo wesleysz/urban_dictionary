@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, createContext, useContext} from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { NavLink, Switch, Route, BrowserRouter, Redirect, useHistory } from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
@@ -17,7 +17,8 @@ import Message from './Hooks/Message';
 import { MUT_USER_LOGIN } from "./graphql"
 import { Button } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
-import { Space, Input } from 'antd';
+import { Space, Input, AutoComplete } from 'antd';
+import { QUE_QUERY_BY_STRING } from "./graphql";
 
 export const UserInfo = createContext();
 function App() {
@@ -28,6 +29,7 @@ function App() {
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
+  const [option, setOption]=useState([]);
   const [hideInput, setHideInput] = useState(false);
 
 	const  login = async (googleUser) =>{
@@ -54,6 +56,36 @@ function App() {
     setuserpenName(data.userLogin.penName)
 	}
 
+  // const searchResult=(value)=>
+  //   new 
+    // const {loading,error,data}=useQuery(QUE_QUERY_BY_SRTING,{variables: {str: value},fetchPolicy: "cache-and-network"});
+    // const {loading,error,data}=client.query({
+    //   query:QUE_QUERY_BY_STRING,
+    //   variables:{str:value}
+    // })
+    // if(loading){
+    //   return{
+    //     value: value,
+    //     label: (
+    //       <div>loading...</div>
+    //     )
+    //   }
+    // }
+    // let res=[];
+    // for(let i=0;i<data.queryByString.length;i++){
+    //   res.push({
+    //     value: value,
+    //     label: (
+    //       <div>{data.queryByString[i].vocabulary}</div>
+    //     )
+    //   })
+    // }
+  
+
+  const tryToSearch=(value)=>{
+    // setOption(value?searchResult(value):[]);
+    setOption([value,value,value].join(".").split("."));
+  }
   
 
   return (
@@ -107,8 +139,7 @@ function App() {
                 )}/>
               </div>
             }
-            
-          </div>
+            </div>
             <Switch>
               <Route exact={true} path="/login" component={LogIn} />
               <Route exact={true} path="/define" component={Define} />
