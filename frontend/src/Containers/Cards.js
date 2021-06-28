@@ -7,12 +7,7 @@ import Card from "../Components/Card";
 const Cards=({data})=>{
 	if(!data.length){
 		return(
-			<div id="general-title" >
-				<p>目前還ㄇ有人定義</p>
-				{/* <NavLink> */}
-					<u style={{color:"#cbdce7", fontSize:"24px"}}>我要定義</u>
-                {/* </NavLink>	 */}
-			</div>
+			<div><p id="general-title">σ`∀´)σㄇ有東東</p></div>
 		);
 	}
 	let list=[];

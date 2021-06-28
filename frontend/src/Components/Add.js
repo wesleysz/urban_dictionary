@@ -46,6 +46,7 @@ const Add = ()=>{
 			// </div>
 		)
 	}
+	// setVocab(check.state.wordToBeDefined);
 	const {email} = check.state;
 
 
@@ -98,6 +99,11 @@ const Add = ()=>{
 				Message({status: "error", msg:"發生不明錯誤...請再試一次"})
 			}
 		}
+	}
+	console.log("vocab",vocab);
+	console.log("check.state.wordToBeDefine",check.state.wordToBeDefine);
+	if(vocab!==check.state.wordToBeDefine){
+		setVocab(check.state.wordToBeDefine);
 	}
 
 	return(

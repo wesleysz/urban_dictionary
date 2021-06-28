@@ -226,6 +226,26 @@
   background-color: #636262;
 }
 
+.cant-find {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.cant-find .botton{
+  margin-top: 1.2rem;
+  margin-right: 3rem;
+  color:aliceblue;
+  background-color: #534b48;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cant-find .botton:hover{
+  color:aliceblue;
+  background-color: #636262;
+}
+
 .add-title {
   /* margin-top: 1rem;  */
   margin-bottom: 2rem;  
