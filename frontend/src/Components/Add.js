@@ -133,15 +133,17 @@ const Add = ()=>{
 		}
 	}
 	console.log("vocab",vocab);
-	console.log("check.state.wordToBeDefine",check.state.wordToBeDefine);
-	if(vocab!==check.state.wordToBeDefine && check.state.wordToBeDefine!==undefined){
-		setVocab(check.state.wordToBeDefine);
+	if(check.state){
+		console.log("check.state.wordToBeDefine",check.state.wordToBeDefine);
+		if(vocab!==check.state.wordToBeDefine && check.state.wordToBeDefine!==undefined){
+			setVocab(check.state.wordToBeDefine);
+		}
 	}
 
 	return(
 		<div className="add">
 			<div className="add-close">
-				<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
+				<NavLink to="/home">
 					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 				</NavLink>
 			</div>
