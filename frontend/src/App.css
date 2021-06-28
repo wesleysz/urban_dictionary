@@ -132,13 +132,14 @@
 }
 
 .card .tags{
-  padding-right: 1.25rem;
+  padding-right: 1rem;
   font-style:oblique;
   /* right: 2.3em; */
   text-align: right;
 }
 
-.card .vocab{
+.card .vocab {
+  display: justify;
   padding-left: 1.4rem;
   margin-bottom: 2em;
   height: auto;
@@ -167,6 +168,7 @@
   text-align: left;
 }
 
+
 .card .card-footer{
   display: inline-block;
   padding:1.25rem;
@@ -179,7 +181,7 @@
   text-align: left;
 }
 
-.card .card-footer .text{
+.card  .text{
   font-weight:bold; 
   text-align: right;
   padding-bottom: 1rem;
@@ -222,6 +224,26 @@
 }
 
 .add-close .botton:hover{
+  color:aliceblue;
+  background-color: #636262;
+}
+
+.cant-find {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.cant-find .botton{
+  margin-top: 1.2rem;
+  margin-right: 3rem;
+  color:aliceblue;
+  background-color: #534b48;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cant-find .botton:hover{
   color:aliceblue;
   background-color: #636262;
 }

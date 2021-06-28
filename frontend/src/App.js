@@ -86,7 +86,14 @@ function App() {
                     return;
                   }
                   const path="/define/"+term;
-          				history.push(path);
+          				history.push({
+                    pathname: path,
+                    state: {
+                      pen: userpenName,
+                      name: userName,
+                      email: userEmail
+                    }
+                  });
                   setSearchWord("");
                 }}
               ></Input.Search>

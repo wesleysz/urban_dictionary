@@ -7,12 +7,7 @@ import Card from "../Components/Card";
 const Cards=({data})=>{
 	if(!data.length){
 		return(
-			<div id="general-title" >
-				<p>目前還ㄇ有人定義</p>
-				{/* <NavLink> */}
-					<u style={{color:"#cbdce7", fontSize:"24px"}}>我要定義</u>
-                {/* </NavLink>	 */}
-			</div>
+			<div><p id="general-title">σ`∀´)σㄇ有東東</p></div>
 		);
 	}
 	let list=[];
@@ -24,7 +19,7 @@ const Cards=({data})=>{
 		// else{
 		// 	list.push(<p className="if_publish">(未發佈)</p>)
 		// }
-
+		console.log(i,data[i].if_publish)
 		list.push(
 			<Card 
 				vocabulary={data[i].vocabulary}
@@ -35,6 +30,7 @@ const Cards=({data})=>{
 				agree_users={data[i].agree_users}
 				disagree_users={data[i].disagree_users}
 				create_date={data[i].create_date}
+				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
 				key={i}
 			/>
 		);
