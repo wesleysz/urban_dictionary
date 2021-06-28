@@ -7,6 +7,7 @@ import { useMutation,useQuery } from '@apollo/react-hooks';
 import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN,QUE_QUERY_BY_USER } from "../graphql"
 import Message from '../Hooks/Message';
 import Cards from "./Cards";
+import UserCards from "./UserCards";
 
 function User ({afunction,hi}){
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
@@ -25,20 +26,6 @@ function User ({afunction,hi}){
 		// )
 	}
 	const { name, email} = check.state;
-	let pEnName=Pen;
-	// if(Pen!=='[你尚未設定筆名]'){
-	// 	pEnName=null;
-	// }
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: "WSZ"}, fetchPolicy: "cache-and-network"});
-	useEffect(()=>{
-		if(data) setList(data.queryByUser);
-		return(()=>{
-			console.log('home unmouted')
-		})
-	},[data]);
-	console.log("data",data);
-	console.log("error",error);
-	console.log("loading",loading);
 	return(
 		<>
 		<div className="add-close">
@@ -80,16 +67,10 @@ function User ({afunction,hi}){
 				}
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg"/>}
 			
-				<div className="title">
-					你目前定義過的單字：
-					<Cards data={data.queryByUser} />
-					{/*{(!data)?<p>loading...</p>:
-						(Pen==='[你尚未設定筆名]')?<p>we</p>:<p>wewwwww</p>
-					}*/}
-				</div>
+				{(Pen!=='[你尚未設定筆名]')?<UserCards pEnName={Pen} />:<p></p>}
 				<div className="padding"/>
+				</div>
 			</div>
-		</div>
 		</>
 	);
 }
