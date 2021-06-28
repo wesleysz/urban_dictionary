@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import Cards from "../Containers/Cards";
-import {useQuery} from '@apollo/react-hooks'
-import {QUE_QUERY_MY_POST } from "../graphql"
-import {UserInfo} from '../App'
+import { useQuery } from '@apollo/react-hooks'
+import { QUE_QUERY_MY_POST } from "../graphql"
+import { UserInfo } from '../App'
 
 const UserCards=()=>{
 	const userInfo = useContext(UserInfo);
