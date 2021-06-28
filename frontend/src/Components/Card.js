@@ -70,7 +70,7 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 
 	const vocabLink="/define/"+vocabulary;
 	const authorLink="/author/"+author.penName;
-	const modifyLink="/user/modify/"+post_id;
+	const modifyLink="/user/"+post_id;
 	// const check = useLocation();
 	// console.log("check",check);
 	return (

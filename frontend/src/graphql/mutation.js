@@ -57,7 +57,7 @@ const MUT_CREATE_POST = gql`
 `;
 
 const MUT_MODIFY_POST=gql`
-mutation ModifyPost($id:ID!, $vocab:String, $explan:String ,$example:String ){
+mutation ModifyPost($id:String!, $vocab:String, $explan:String ,$example:String ){
 	modifyPost(
 	  	post_id:$id
 	  	vocabulary: $vocab

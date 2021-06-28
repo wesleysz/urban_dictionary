@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { NavLink, Redirect,  useLocation, useHistory, useParams } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
 import { MUT_MODIFY_POST, QUE_QUERY_BY_ID } from '../graphql';
@@ -15,40 +15,29 @@ const Modify = ()=>{
     const [vocab, setVocab] = useState("");
 	const [explanation, setExplanation] = useState("");
 	const [example, setExample] = useState("");
+	let history = useHistory();
+
     useEffect(()=>{
         if(data){
+            console.log('effect')
             setVocab(data.queryById.vocabulary)
             setExplanation(data.queryById.explanation)
             setExample(data.queryById.example)}
     },[data]
     )
-	if((!loading && data && data.queryById.author.email!==userInfo.email)||error){
-        <Redirect to="/home"/> 
+    console.log("data in mod",data);
+	console.log("error in mod",error);
+	console.log("loading",loading)
+	if((!loading && data && data.queryById.author.email!==userInfo.email)){
+        console.log('case A')
+        return <Redirect to="/home"/> 
     }
-		
-	if(!userInfo.penName){
-		return(
-			<div className="add">
-				<div className="add-close">
-					<NavLink to="/home">
-						<Button variant="contained" color="primary" className="botton" >回首頁</Button>
-					</NavLink>
-				</div>
-				<div className="add-title" style={{marginTop:"5rem"}}>
-					<p>你還ㄇ有筆名ㄝ！</p>
-					<NavLink to="/user">
-						{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
-						<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
-					</NavLink>
-				</div>
-			</div>
-			// <div className="add-title">
-			// 	你ㄇ有筆名耶
-			// 	<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
-			// </div>
-		)
-	}
-
+	
+    if(!userInfo.penName){
+        console.log('case C')
+        return <Redirect to="/home"/> 
+    }	
+	
 	const handleCreate = async ()=>{
 		let msg = "請填寫 "
 		let ok = true;
@@ -71,27 +60,27 @@ const Modify = ()=>{
 			const res = await modPost({
 				variables:{
 					id: postid,
-					vocab,
+					vocab: vocab,
 					explan: explanation,
-					example
+					example: example
 				}
 			})
 			if(res.data.modifyPost.success){
 				Message({status:"success",msg:"修改成功！"})
-                // Message({status: "success", msg: "恭喜，成功定義你的詞語！"})
                 setVocab("")
                 setExplanation("")
                 setExample("")
-                return(<Redirect to="/user" />)
-				
+				return(
+                    history.push({
+                        pathname: '/user'
+                    })
+                )
 			}
 			else{
 				Message({status: "error", msg:res.data.modifyPost.message})
-			}
+            }
 		}
 	}
-	console.log("vocab",vocab);
-	
 
 	return(
 		<div className="add">
