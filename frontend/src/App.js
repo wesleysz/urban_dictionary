@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, createContext, useContext} from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { NavLink, Switch, Route, BrowserRouter, Redirect, useHistory } from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
@@ -16,7 +16,8 @@ import Message from './Hooks/Message';
 import { MUT_USER_LOGIN } from "./graphql"
 import { Button } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
-import { Space, Input } from 'antd';
+import { Space, Input, AutoComplete } from 'antd';
+import { QUE_QUERY_BY_STRING } from "./graphql";
 
 export const UserInfo = createContext();
 function App() {
@@ -27,6 +28,7 @@ function App() {
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
+  const [option, setOption]=useState([]);
 
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
@@ -52,6 +54,36 @@ function App() {
     setuserpenName(data.userLogin.penName)
 	}
 
+  // const searchResult=(value)=>
+  //   new 
+    // const {loading,error,data}=useQuery(QUE_QUERY_BY_SRTING,{variables: {str: value},fetchPolicy: "cache-and-network"});
+    // const {loading,error,data}=client.query({
+    //   query:QUE_QUERY_BY_STRING,
+    //   variables:{str:value}
+    // })
+    // if(loading){
+    //   return{
+    //     value: value,
+    //     label: (
+    //       <div>loading...</div>
+    //     )
+    //   }
+    // }
+    // let res=[];
+    // for(let i=0;i<data.queryByString.length;i++){
+    //   res.push({
+    //     value: value,
+    //     label: (
+    //       <div>{data.queryByString[i].vocabulary}</div>
+    //     )
+    //   })
+    // }
+  
+
+  const tryToSearch=(value)=>{
+    // setOption(value?searchResult(value):[]);
+    setOption([value,value,value].join(".").split("."));
+  }
   
 
   return (
@@ -74,32 +106,36 @@ function App() {
             </div>
             <div className="row-bar" >
               <Route render={({history})=>(
-                <Input.Search
-                  className="search-bar"
-                  placeholder="嗨？ 想找甚麼ㄋ？"
-                  enterButton="搜尋"
-                  size="large"
-                  value={searchWord}
-                  onChange={(e)=>{
-                    setSearchWord(e.target.value);
-                  }}
-                  onSearch={(term)=>{
-                    if(term.length===0){
-                      Message({status:'warning', msg:"請輸入搜尋內容！"})
-                      return;
-                    }
-                    const path="/define/"+term;
-                    history.push({
-                      pathname: path,
-                      state: {
-                        pen: userpenName,
-                        name: userName,
-                        email: userEmail
+                <AutoComplete
+                  options={option}
+                  onSearch={tryToSearch}
+                ><Input.Search
+                    className="search-bar"
+                    placeholder="嗨？ 想找甚麼ㄋ？"
+                    enterButton="搜尋"
+                    size="large"
+                    value={searchWord}
+                    onChange={(e)=>{
+                      setSearchWord(e.target.value);
+                    }}
+                    onSearch={(term)=>{
+                      if(term.length===0){
+                        Message({status:'warning', msg:"請輸入搜尋內容！"})
+                        return;
                       }
-                    });
-                    setSearchWord("");
-                  }}
-                ></Input.Search>
+                      const path="/define/"+term;
+                      history.push({
+                        pathname: path,
+                        state: {
+                          pen: userpenName,
+                          name: userName,
+                          email: userEmail
+                        }
+                      });
+                      setSearchWord("");
+                    }}
+                  ></Input.Search>
+                </AutoComplete>
               )}/>
             </div>
           </div>
