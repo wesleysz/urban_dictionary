@@ -9,7 +9,6 @@ import { NavLink} from "react-router-dom";
 const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date,published})=>{
 	let vocabLink="/define/"+vocabulary;
 	let authorLink="/author/"+author.penName;
-	const pubClass = published!==null?"-pub":"";
 	return (
 		<div className="card">
 			{published!==null?
