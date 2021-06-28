@@ -61,7 +61,16 @@ function User ({afunction,hi}){
 						}
 					}
 					/> :
-					<Button variant="outlined" className="botton" onClick={()=>{setChanegPenName(true)}}>更改筆名</Button>
+					<Button variant="outlined" color="primary" className="botton" onClick={()=>{setChanegPenName(true)}}>
+						更改筆名
+					</Button>
+				}
+				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
+				<div className="padding"/>
+				
+				{(Pen!=='[你尚未設定筆名]')?
+					<UserCards pEnName={Pen} /> :
+					<p></p>
 				}
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg"/>}
 			

@@ -81,12 +81,16 @@
 }
 
 .header .row-bar {
-  padding-left: 25%;
-  padding-right: 25%;
-  /* margin: 0 auto; */
-  /* max-width: 60rem; */
   width: 100%;
   height: 4rem;
+  text-align: center;
+}
+
+.header .row-bar .search-bar{
+  justify-content: center; 
+  align-items: center; 
+  margin: auto;
+  width: 800px;
 }
 
 .header a.title {
@@ -113,20 +117,18 @@
   font-size: 1.5625rem;
 }
 
-#content {
-  margin-top: 2.2rem;
-  margin-left: 25%;
-  margin-right: 25%;
-}
 
 .card{
-  background-color: rgb(209, 238, 250);
-  margin-bottom: 2.4rem; 
+  justify-content: center; 
+  align-items: center; 
+  margin: auto;
+  background-color: #d7f8fd;
+  margin-top: 2.4rem; 
   padding: 1.4rem;
   color: #333333;
   box-shadow: 1px 1px 2px #a9aaaa;
-  /* padding-bottom: 0; */
-  word-wrap: break-word; 
+  word-wrap: break-word;
+  width:800px
 }
 
 .card .tags{
@@ -137,11 +139,12 @@
 }
 
 .card .vocab{
-  padding-left: 1.25rem;
+  padding-left: 1.4rem;
   margin-bottom: 2em;
   height: auto;
   max-width: none;
   width: auto;
+  text-align: left;
 }
 
 .card .vocab .word {
@@ -151,45 +154,41 @@
   line-height: 129%;
   text-decoration: none;
   vertical-align: middle;
+  text-align: left;
 }
 
 .card .meaning, .card .example {
-  padding-left: 1.25rem;
+  padding-left: 1.4rem;
   margin-top: 1.7em;
   margin-bottom: 1.3em;
   color: #2C353C;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: bold;
-}
-
-.card .author{
-  padding-left: 1.25rem;
-  font-weight: bold;
-  right: 2em;
-  text-align: right;
+  text-align: left;
 }
 
 .card .card-footer{
   display: inline-block;
   padding:1.25rem;
-  padding-right: 0rem;
+  padding-right: 1rem;
   margin-top: 0.5em;
   margin-bottom: 0.7em;
   height: 2rem;
   max-width: none;
   width: 50%;
+  text-align: left;
 }
 
 .card .card-footer .text{
   font-weight:bold; 
   text-align: right;
   padding-bottom: 1rem;
-  font-size: 17px;
+  font-size: 18px;
   /* font-style: italic; */
 }
 
 .footer {
-  height: 3rem;
+  height: 5rem;
   width: auto;
 }
 
@@ -278,9 +277,13 @@
   justify-content: center; 
   align-items: center; 
   margin: auto; 
-  width: 50%;
+  width: 1100px;
+  /* background-color: #bee3ff; */
+
   background-color: rgb(213, 229, 243);
 }
+
+
 #user .component .padding{
   height: 1rem; 
   width: 100%;
@@ -289,14 +292,14 @@
 #user .component .title{
   margin-bottom: 3rem;  
   margin-top: 2.8rem;
-  color: #1041ac;
-  font-size: 22px;
+  color: #14316e;
+  font-size: 24px;
   font-weight: 600;
 }
 
 #user .component .botton{
-  color: #302d2c;
-  font-size: 16px;
+  color: #4d92c0;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -308,8 +311,8 @@
 }
 
 #general-title{
-  margin-bottom: 2rem;  
   text-align: center;
+  margin-top: 2rem;  
   /* text-transform: uppercase; */
   color: #FFFFFF;
   font-weight: 600;

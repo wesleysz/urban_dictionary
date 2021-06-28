@@ -3,11 +3,23 @@ const Query = {
         if(str.length === 0){
             return []
         }
-
-        const res =  await db.PostModel.find( 
-            { vocabulary: { $regex: new RegExp(str, "i")}, if_publish: true} //test upper lower case
-        );
-        return res
+        // 處理特殊字元
+        const element = ["|", "*", "(", ")", "+", '\\',  "$", "^", "[", "[]", "."]
+        var test1 = element.some(el => str.includes(el));
+        // console.log(test1)
+        if(test1){
+            const res = await db.PostModel.find({
+                vocabulary: str, 
+                if_publish: true
+            })
+            return res
+        }
+        else{
+            const res =  await db.PostModel.find( 
+                { vocabulary: { $regex: new RegExp(str, "i")}, if_publish: true} //test upper lower case
+            );
+            return res
+        }
     },
 
     async queryByUser( parent, {penName}, { db }, info ){
@@ -22,11 +34,24 @@ const Query = {
         if(vocabulary.length === 0){
             return []
         }
-        const res =  await db.PostModel.find( 
-            { vocabulary: {$regex: new RegExp('^' + vocabulary+'$', 'i')}, if_publish: true }
-            // { vocabulary: new RegExp(vocabulary, "i")} //test upper lower case
-        );
-        return res
+        // 處理特殊字元
+        const element = ["|", "*", "(", ")", "+", '\\',  "$", "^", "[", "[]", "."]
+        var test1 = element.some(el => vocabulary.includes(el));
+        // console.log(test1)
+        if(test1){
+            const res = await db.PostModel.find({
+                vocabulary: vocabulary, 
+                if_publish: true
+            })
+            return res
+        }
+        else{
+            const res =  await db.PostModel.find( 
+                { vocabulary: {$regex: new RegExp('^' + vocabulary+'$', 'i')}, if_publish: true }
+                // { vocabulary: new RegExp(vocabulary, "i")} //test upper lower case
+            );
+            return res
+        }
     },
 
     async randomFivePosts( parent, args, { db }, info ){
