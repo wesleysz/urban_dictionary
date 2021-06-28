@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useQuery } from '@apollo/react-hooks'
 import { useParams, useLocation } from 'react-router-dom'
 import Cards from "../Containers/Cards";
 import { QUE_QUERY_BY_VOCABULARY } from "../graphql";
 import { NavLink } from "react-router-dom";
+import { UserInfo } from '../App';
 
 const Define=()=>{
 	const [List, setList] = useState([]);
 	const { term } = useParams();
-	// const check = useLocation();
-	// console.log("check",check);
-	console.log("term",term);
+	
+	const userInfo = useContext(UserInfo);
+	userInfo.setHideInput(false);
+
 	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: term},fetchPolicy: "cache-and-network"});
 	useEffect(()=>{
 		if(data) setList(data.queryByVocabulary);

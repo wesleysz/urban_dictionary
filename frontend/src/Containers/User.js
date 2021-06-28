@@ -11,7 +11,7 @@ import { UserInfo } from '../App'
 
 function User ({afunction}){
 	const userInfo = useContext(UserInfo);
-	console.log(userInfo);
+	userInfo.setHideInput(true);
 
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
 

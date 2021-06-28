@@ -6,6 +6,7 @@ import { useContext } from 'react';
 
 const NotLogin = ()=>{
 	const userInfo = useContext(UserInfo)
+	userInfo.setHideInput(true);
 
 	return(
 		userInfo.email?
