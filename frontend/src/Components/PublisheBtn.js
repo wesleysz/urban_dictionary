@@ -35,11 +35,20 @@ const PublishBtn = ({Published, id})=>{
         }
     }
     return(
-        
             published? 
-            <Button onClick={unpubHandler}>點我隱藏</Button>:
-            <Button onClick={pubHandler}>點我發布</Button>
-        
+            <>
+                <div style={{fontSize:"18px", fontStyle:"normal", color:"darkgreen", textAlign:"center", height:"20px"}}>
+                    公開發表
+                </div> 
+                <Button onClick={unpubHandler} id="donofocus" style={{fontWeight:600, textAlign:"right"}} danger>點我隱藏</Button>
+                
+            </>:
+            <>
+                <div style={{fontSize:"18px", fontStyle:"normal", color:"darkgreen", textAlign:"center", height:"20px"}}>
+                    限本人檢視
+                </div> 
+                <Button onClick={pubHandler}  id="donofocus" style={{fontWeight:600}} danger>點我發佈</Button>
+            </>      
     )
 }
 

@@ -81,24 +81,38 @@ mutation PublishPost($ptid : String!){
   `;
 
 const MUT_ADD_AGREE=gql`
-	mutation addAgree(
+	mutation clickAgree(
 		$post_id: String!
 		$email: String!
 	){
-		addAgree(
+		clickAgree(
 			post_id: $post_id
 			email: $email
 		){
 			success
-			agree_cnt
-			disagree_cnt
+    		agree_users
+    		disagree_users
+
 		}
 	}
 `;
 
-const MUT_ADD_DISAGREE="";
+const MUT_ADD_DISAGREE=gql`
+	mutation clickDisagree(
+		$post_id: String!
+		$email: String!
+	){
+		clickDisagree(
+			post_id: $post_id
+			email: $email
+		){
+			success
+			agree_users
+			disagree_users
+		}
+	}
+`;
 
-const MUT_DELETE_VOCAB="";
 
 export {MUT_USER_LOGIN,
 		MUT_MODIFY_PEN_NAME,
@@ -107,6 +121,5 @@ export {MUT_USER_LOGIN,
 		MUT_UNPUBLISH_POST,
 		MUT_PUBLISH_POST,
 		MUT_ADD_AGREE,
-		MUT_ADD_DISAGREE,
-		MUT_DELETE_VOCAB
+		MUT_ADD_DISAGREE
 		};

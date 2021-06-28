@@ -15,6 +15,7 @@
   top:0;
   left:0;
   background-color: #739fbd;
+
   /*set the width and height to 100% of the screen*/
   width:100%;
   height:auto;
@@ -177,6 +178,16 @@
   max-width: none;
   width: 50%;
   text-align: left;
+}
+
+#donofocus{
+  box-shadow: #4d92c0;
+  color: #224b97;
+  border-color: #99aed4;
+}
+#donofocus:hover, #donofocus:focus{
+  outline-color:none !important;
+  box-shadow: none !important;
 }
 
 .card  .text{
