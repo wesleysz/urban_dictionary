@@ -5,6 +5,7 @@ import Message from '../Hooks/Message';
 import {MUT_CREATE_POST} from '../graphql';
 import {IconButton, Button} from '@material-ui/core';
 import {Input} from 'antd';
+import {UserInfo} from '../App'
 
 const Add = ()=>{
 	const [vocab, setVocab] = useState("");
@@ -14,19 +15,24 @@ const Add = ()=>{
 	const [addPost] = useMutation(MUT_CREATE_POST);
 	
 	let history = useHistory();
-	const check = useLocation();
-	console.log("check", check);
-	if(!check.state){
+	// const check = useLocation();
+	// console.log("check", check);
+	const userInfo = useContext(UserInfo);
+	console.log("[User] UserInfo", userInfo);
+	if(userInfo.email===undefined){
 		return(
-			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
+			<Redirect exact={true} from="/add" to="/add/notLogin" />
 		)
 	}
-	if(check.state.email.length === 0){
-		return(
-			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
-		)
-	}
-	console.log("[Add]", check.state.email, check.state.name, check.state.pen)
+	// if(!check.state){
+		
+	// }
+	// if(check.state.email.length === 0){
+	// 	return(
+	// 		<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
+	// 	)
+	// }
+	// console.log("[Add]", check.state.email, check.state.name, check.state.pen)
 
 	if(!check.state.pen){
 		return(

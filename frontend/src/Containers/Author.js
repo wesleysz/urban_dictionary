@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useQuery } from '@apollo/react-hooks'
 import { useParams, useLocation } from 'react-router-dom'
 import Cards from "../Containers/Cards";
 import { QUE_QUERY_BY_USER } from "../graphql";
+import {UserInfo} from '../App';
 
 const Author=()=>{
 	const [List, setList] = useState([]);
 	const { penname : penName }= useParams();
 
-	const check = useLocation();
+	// const check = useLocation();
+	const userInfo = useContext(UserInfo);
+	console.log("[User] UserInfo", userInfo);
 
 	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: penName},fetchPolicy: "cache-and-network"});
 
@@ -33,7 +36,7 @@ const Author=()=>{
 		<div id="content">
 			{/* <div className="footer" /> */}
 			<p id="general-title">{penName}的相關結果：</p>
-			<Cards data={List} email = {check? check.state.email: null}/>
+			<Cards data={List} />
 		</div>
 	)
 }
