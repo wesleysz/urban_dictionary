@@ -1,12 +1,14 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Cards from "../Containers/Cards";
 import {useQuery} from '@apollo/react-hooks'
 import {QUE_QUERY_MY_POST } from "../graphql"
+import {UserInfo} from '../App'
 
 const UserCards=(eMail)=>{
-	const [List, setList] = useState([]);
+	const userInfo = useContext(UserInfo);
+	// const [List, setList] = useState([]);
 	// console.log("eMail",eMail.eMail);
-	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "network-only"});
+	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: userInfo.email}, fetchPolicy: "network-only"});
 
 	// useEffect(()=>{
 	// 	if(data) {setList(data.queryMyPost);
@@ -32,7 +34,7 @@ const UserCards=(eMail)=>{
 		<div className="title">
 			你目前定義過的單字：
 			<div className="footer" style={{height:"2rem"}}/>
-			<Cards data={List} email={eMail}/>
+			<Cards data={data.queryMyPost} />
 		</div>
 	)
 }

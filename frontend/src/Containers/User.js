@@ -10,16 +10,18 @@ import UserCards from "../Components/UserCards";
 import {UserInfo} from '../App'
 
 function User ({afunction,hi}){
-	const userInfo = useContext(UserInfo)
+	const userInfo = useContext(UserInfo);
+	console.log(userInfo);
 
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
 
 	const [showMsg, setshowMsg]=useState(false);
 	const [Msg, setMsg]=useState('');
-	const [Pen, setPen]=useState('[你尚未設定筆名]');
+	// const [Pen, setPen]=useState(userInfo.pen);
 	const [changePenName, setChanegPenName]=useState(false);
 
 	// useEffect(()=>{if(check.state && check.state.pen)setPen(check.state.pen); return(()=>{console.log("unmountede",hi)})},[check])
+	
 	if(!userInfo.email){
 		return(
 			<Redirect exact={true} from="/user" to="/user/notLogin" />
@@ -37,7 +39,10 @@ function User ({afunction,hi}){
 			<div className="component" >
 				<div className="padding"/>
 					<div className="title">
-						{userInfo.name}，你目前的筆名為"{userInfo.penName}"
+						{(userInfo.penName)?
+							<p>{userInfo.name}，你目前的筆名為"{userInfo.penName}"</p>:
+							<p>{userInfo.name}，你ㄇ有筆名喔</p>
+						}
 					</div>
 				{changePenName?
 					<Input.Search
@@ -48,13 +53,14 @@ function User ({afunction,hi}){
 						enterButton="儲存"
 						size="medium"
 						onSearch={async (penName)=>{
-							const {data} = await startModPen({variables:{pen:penName, email: userInfo.email}})
+							const {data} = await startModPen({variables:{pen:penName, email: userInfo.email}});
 							if(data.modifyPenName.success){
-								setPen(penName);
+								userInfo.setPenName(penName);
+								// setPen(penName);
 								setChanegPenName(false);
 								setshowMsg(false);
 								Message({status:"success", msg:"成功更改筆名"})
-								userInfo.setPenName(penName)
+								// userInfo.setPenName(penName)
 							}
 							else{
 								setMsg(data.modifyPenName.message)//success
@@ -65,12 +71,12 @@ function User ({afunction,hi}){
 					}
 					/> :
 					<Button variant="outlined" color="primary" className="botton" onClick={()=>{setChanegPenName(true)}}>
-						{Pen === '[你尚未設定筆名]'? '新增筆名':'更改筆名'}
+						{(!userInfo.penName)? '新增筆名':'更改筆名'}
 					</Button>
 				}
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
 				
-				{(Pen!=='[你尚未設定筆名]')?
+				{(userInfo.penName)?
 					<UserCards /> :
 					null
 				}

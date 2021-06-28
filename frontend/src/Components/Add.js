@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink, Redirect,  useLocation, useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
@@ -15,11 +15,11 @@ const Add = ()=>{
 	const [addPost] = useMutation(MUT_CREATE_POST);
 	
 	let history = useHistory();
-	// const check = useLocation();
-	// console.log("check", check);
+	const check = useLocation();
+	console.log("check", check);
 	const userInfo = useContext(UserInfo);
 	console.log("[User] UserInfo", userInfo);
-	if(userInfo.email===undefined){
+	if(!userInfo.email){
 		return(
 			<Redirect exact={true} from="/add" to="/add/notLogin" />
 		)
@@ -33,22 +33,20 @@ const Add = ()=>{
 	// 	)
 	// }
 	// console.log("[Add]", check.state.email, check.state.name, check.state.pen)
-
-	if(!check.state.pen){
+	if(!userInfo.penName){
 		return(
 			<div className="add">
 				<div className="add-close">
-					<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
+					<NavLink to="/home">
 						<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 					</NavLink>
 				</div>
 				<div className="add-title" style={{marginTop:"5rem"}}>
 					<p>你還ㄇ有筆名ㄝ！</p>
-					<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}>
+					<NavLink to="/user">
 						{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
 						<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
 					</NavLink>
-					
 				</div>
 			</div>
 			// <div className="add-title">
@@ -57,8 +55,31 @@ const Add = ()=>{
 			// </div>
 		)
 	}
+	// if(!check.state.pen){
+	// 	return(
+	// 		<div className="add">
+	// 			<div className="add-close">
+	// 				<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
+	// 					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
+	// 				</NavLink>
+	// 			</div>
+	// 			<div className="add-title" style={{marginTop:"5rem"}}>
+	// 				<p>你還ㄇ有筆名ㄝ！</p>
+	// 				<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}>
+	// 					{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
+	// 					<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
+	// 				</NavLink>
+					
+	// 			</div>
+	// 		</div>
+	// 		// <div className="add-title">
+	// 		// 	你ㄇ有筆名耶
+	// 		// 	<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
+	// 		// </div>
+	// 	)
+	// }
 	// setVocab(check.state.wordToBeDefined);
-	const {email} = check.state;
+	// const {email} = check.state;
 
 
 	const handleCreate = async ()=>{
@@ -82,7 +103,7 @@ const Add = ()=>{
 		else{
 			const res = await addPost({
 				variables:{
-					email: email,
+					email: userInfo.email,
 					vocabulary: vocab,
 					explanation,
 					example
@@ -97,7 +118,7 @@ const Add = ()=>{
 					return(
 						history.push({
 							pathname: '/add/success',
-							state: { pen: check.state.pen ,name:check.state.name, email:check.state.email }
+							// state: { pen: check.state.pen ,name:check.state.name, email:check.state.email }
 						})
 						// <Redirect exact={true} from="/add" to={{
 						// 	pathname:"/add/success", 
