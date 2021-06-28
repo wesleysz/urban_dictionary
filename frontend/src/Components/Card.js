@@ -1,32 +1,69 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import '../App.css';
 import PublishBtn from './PublisheBtn';
-import { Typography } from '@material-ui/core';
+import { createChainedFunction, Typography } from '@material-ui/core';
 import { ThumbUp, ThumbDown } from '@material-ui/icons';
 import { Space, Input, Button } from 'antd';
 import { NavLink, useLocation} from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
-import {MUT_ADD_AGREE} from '../graphql';
+import { MUT_ADD_AGREE, MUT_ADD_DISAGREE } from '../graphql';
 import Message from '../Hooks/Message';
-import {UserInfo} from '../App';
+import { UserInfo } from '../App';
+import { yellow } from '@material-ui/core/colors';
 
 const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date,published})=>{
-	const [add_agree] = useMutation(MUT_ADD_AGREE);
-	const [agree_cnt, setAgree_cnt] = useState(agree_users.length);
-	const [disagree_cnt, setDisagree_cnt] = useState(disagree_users.length);
+	const [agreeList, setAgreeList] = useState(agree_users);
+	const [disagreeList, setDisgreeList] = useState(disagree_users);
 	const userInfo=useContext(UserInfo);
-	let user_email=userInfo.email;
+	let fa = false
+	let fd = false
+	if(userInfo.email){
+		fa = agree_users.includes(userInfo.email)
+		fd = disagree_users.includes(userInfo.email)
+	}
+	const [focusAgree, setFocusAgree] = useState(fa)
+	const [focusDisagree, setFocusDisagree] = useState(fd)
+
+	const [add_agree] = useMutation(MUT_ADD_AGREE);
+	const [add_disagree] = useMutation(MUT_ADD_DISAGREE);
+	
+	useEffect(()=>{
+		let fat = false
+		let fdt = false
+		if(userInfo.email){
+			fat = agreeList.includes(userInfo.email)
+			fdt = disagreeList.includes(userInfo.email)
+		}
+		setFocusAgree(fat);
+		setFocusDisagree(fdt);
+	},
+	[agreeList, disagreeList, userInfo])
+
 	const handleAgree = async ()=>{
-		if(!user_email || user_email.length === 0){
+		if( !userInfo.email ){
 			Message({status:"warning", msg:"你必須先登入！"});
 		}
 		else{
 			const {data} = await add_agree(
-				{variables: {post_id: post_id, email: user_email}}
+				{variables: {post_id: post_id, email: userInfo.email}}
 			)
-			if(data.addAgree.success === true){
-				setAgree_cnt( data.addAgree.agree_cnt)
-				setDisagree_cnt( data.addAgree.disagree_cnt)
+			if(data.clickAgree.success === true){
+				setAgreeList( data.clickAgree.agree_users)
+				setDisgreeList( data.clickAgree.disagree_users)
+			}
+		}
+	}
+	const handleDisagree = async ()=>{
+		if( !userInfo.email ){
+			Message({status:"warning", msg:"你必須先登入！"});
+		}
+		else{
+			const {data} = await add_disagree(
+				{variables: {post_id: post_id, email: userInfo.email}}
+			)
+			if(data.clickDisagree.success === true){
+				setAgreeList( data.clickDisagree.agree_users)
+				setDisgreeList( data.clickDisagree.disagree_users)
 			}
 		}
 	}
@@ -52,18 +89,37 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 			<div className="example">例句：{example}</div>
 			<div className="author"> </div>
 			<div className="card-footer"> 
-				<Button onClick={handleAgree}>
-					<Space size={4}> 
-						<ThumbUp color="primary" />
-						<Typography variant="button" display="block" gutterBottom >{agree_cnt}</Typography>
-					</Space>
-				</Button>
-				<Button >
-					<Space size={4}> 
-						<ThumbDown color="primary" />
-						<Typography variant="button" display="block" gutterBottom >{disagree_cnt}</Typography>
-					</Space>
-				</Button>
+				{focusAgree?
+					<Button onClick={handleAgree} id="donofocus" style={{backgroundColor:"#b9d8ec"}} danger>
+						<Space size={4}> 
+							<ThumbUp color="primary" />
+							<Typography variant="button" display="block" gutterBottom >{agreeList.length}</Typography>
+						</Space>
+					</Button>
+					:
+					<Button onClick={handleAgree} id="donofocus" danger>
+						<Space size={4}> 
+							<ThumbUp color="primary" />
+							<Typography variant="button" display="block" gutterBottom >{agreeList.length}</Typography>
+						</Space>
+					</Button>
+				}
+				{focusDisagree?
+					<Button onClick={handleDisagree} id="donofocus" style={{backgroundColor:"#b9d8ec"}} danger>
+						<Space size={4}> 
+							<ThumbDown color="primary" />
+							<Typography variant="button" display="block" gutterBottom >{disagreeList.length}</Typography>
+						</Space>
+					</Button>
+					:
+					<Button onClick={handleDisagree} id="donofocus" danger>
+						<Space size={4}> 
+							<ThumbDown color="primary" />
+							<Typography variant="button" display="block" gutterBottom >{disagreeList.length}</Typography>
+						</Space>
+					</Button>
+				}
+
 			</div>
 			<div className="card-footer" >
 				{(published===null)?

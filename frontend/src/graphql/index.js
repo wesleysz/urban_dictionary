@@ -7,5 +7,4 @@ export {MUT_USER_LOGIN,
 		MUT_PUBLISH_POST,
 		MUT_ADD_AGREE,
 		MUT_ADD_DISAGREE,
-		MUT_DELETE_VOCAB
 		} from "./mutation";

@@ -46,7 +46,7 @@ const Define=()=>{
 					<NavLink to={{pathname:"/add", state:{ wordToBeDefine:term}}}><button className="botton">來去定義{term}</button></NavLink>
 					)
 				}*/}
-				<NavLink to={{pathname:"/add", state:{ wordToBeDefine:term}}}><button className="botton">來去定義{term}</button></NavLink>
+				<NavLink to={{pathname:"/add", state:{ wordToBeDefine:term}}}><button className="botton">來去定義 {term}</button></NavLink>
 			</div>
 		)
 	}
