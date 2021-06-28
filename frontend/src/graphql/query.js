@@ -13,7 +13,6 @@ const QUE_QUERY_BY_STRING=gql`
 			explanation,
 			example,
 			tags,
-			if_publish,
 			agree_users,
 			disagree_users,
 			create_date
@@ -34,7 +33,6 @@ const QUE_QUERY_BY_VOCABULARY=gql`
 			explanation,
 			example,
 			tags,
-			if_publish,
 			agree_users,
 			disagree_users,
 			create_date
@@ -55,7 +53,6 @@ const QUE_QUERY_BY_USER=gql`
 			explanation,
 			example,
 			tags,
-			if_publish,
 			agree_users,
 			disagree_users,
 			create_date
