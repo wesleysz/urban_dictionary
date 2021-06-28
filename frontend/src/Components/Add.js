@@ -19,7 +19,7 @@ const Add = ()=>{
 	console.log("check", check);
 	if(!check.state){
 		return(
-			<Redirect exact={true} from="/add" to="/add/NotLogin" />
+			<Redirect exact={true} from="/add" to={{pathname:"/add/NotLogin", state:{ pen:null ,name:null, email:null}}} />
 		)
 	}
 	if(!check.state.pen){

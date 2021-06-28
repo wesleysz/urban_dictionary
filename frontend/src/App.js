@@ -22,6 +22,7 @@ function App() {
   const [startLogin] = useMutation(MUT_USER_LOGIN)
   const [userName, setuserName]=useState("");
   const [userEmail, setuserEmail]=useState("");
+  const [imageUrl,setImageUrl]=useState("");
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
@@ -29,8 +30,10 @@ function App() {
   // console.log(check);
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
+    // console.log("profile",profile);
 		setuserName(profile.getName());
 		setuserEmail(profile.getEmail());
+    setImageUrl(profile.getImageUrl());
 		setisLogin(true);
     const {data} = await startLogin({variables:{name:profile.getName(), email:profile.getEmail()}})
     setuserpenName(data.userLogin.penName)
@@ -62,7 +65,7 @@ function App() {
               <Space size={18}>
               {isLogin?<NavLink to={{pathname:"/add", state:{ pen:userpenName,name:userName,email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null}
               {isLogin?<NavLink to={{pathname:"/user", state:{ pen:userpenName ,name:userName, email:userEmail}}}>
-              <Button className="botton">{userName}，你好</Button></NavLink> :null}
+              <Button className="botton">{userName} <img id="profileImage" src={imageUrl} /></Button></NavLink> :null}
             <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
               </Space>
             </div>

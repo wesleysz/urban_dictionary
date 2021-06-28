@@ -12,11 +12,9 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 	return (
 		<div className="card">
 			{/*<div className="tags">#tag1 #tag2</div>*/}
-			<NavLink to={vocabLink}>
-				<div className="vocab">
-					<a className="word">{vocabulary}</a>
-				</div>
-			</NavLink>
+			<div className="vocab">
+				<p className="word"><NavLink to={vocabLink}>{vocabulary}</NavLink></p>
+			</div>
 			<div className="meaning">釋義：{explanation}</div>
 			<div className="example">例句：{example}</div>
 			<div className="author"> </div>

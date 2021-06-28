@@ -73,6 +73,13 @@
   color: #a5c5da;
 }
 
+#profileImage{
+  border-radius: 50%;
+  height: 40px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
 .header .row-bar {
   padding-left: 25%;
   padding-right: 25%;
