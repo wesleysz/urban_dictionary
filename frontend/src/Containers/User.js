@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom";
 import {Input} from 'antd';
 import { Button } from '@material-ui/core';
@@ -7,11 +7,15 @@ import { useMutation,useQuery } from '@apollo/react-hooks';
 import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN,QUE_QUERY_BY_USER } from "../graphql"
 import Message from '../Hooks/Message';
 import UserCards from "../Components/UserCards";
+import {UserInfo} from '../App'
 
 function User ({afunction,hi}){
+	const userInfo = useContext(UserInfo)
+	console.log("[User] UserInfo", userInfo)
+
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
 	const check = useLocation();
-	console.log("check",check);
+	// console.log("check",check);
 	const [showMsg, setshowMsg]=useState(false);
 	const [Msg, setMsg]=useState('');
 	const [Pen, setPen]=useState('[你尚未設定筆名]');
@@ -75,7 +79,7 @@ function User ({afunction,hi}){
 			</div>
 		</div>
 		</>
-	);
+	)
 }
 
 export default  User
