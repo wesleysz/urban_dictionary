@@ -2,12 +2,17 @@ import React from 'react';
 import {useQuery,useLazyQuery} from '@apollo/react-hooks'
 
 import Card from "../Components/Card";
-import {QUE_QUERY_BY_STRING, QUE_QUERY_BY_VOCABULARY, QUE_QUERY_BY_USER, QUE_RANDOM_FIVE_POSTS} from "../graphql/index";
+
 
 const Cards=({data})=>{
 	if(!data.length){
 		return(
-			<div><p>ㄇ有東東</p></div>
+			<div id="general-title" >
+				<p>目前還ㄇ有人定義</p>
+				{/* <NavLink> */}
+					<u style={{color:"#cbdce7", fontSize:"24px"}}>我要定義</u>
+                {/* </NavLink>	 */}
+			</div>
 		);
 	}
 	let list=[];

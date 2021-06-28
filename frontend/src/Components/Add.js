@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom";
+import { NavLink, Redirect,  useLocation, useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
 import {MUT_CREATE_POST} from '../graphql';
@@ -12,14 +12,17 @@ const Add = ()=>{
 	const [example, setExample] = useState("");
 
 	const [addPost] = useMutation(MUT_CREATE_POST);
-
+	
+	let history = useHistory();
 	const check = useLocation();
 	console.log("check", check);
 	if(!check.state){
 		return(
-			<Redirect exact={true} from="/add" to={{pathname:"/add/NotLogin", state:{ pen:null ,name:null, email:null}}} />
+			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
 		)
 	}
+	console.log("[Add]", check.state.email, check.state.name, check.state.pen)
+
 	if(!check.state.pen){
 		return(
 			<div className="add">
@@ -75,10 +78,20 @@ const Add = ()=>{
 			})
 			if(res.data.createPost){
 				if(res.data.createPost.vocabulary === vocab){
-					Message({status: "success", msg: "恭喜，成功定義你的詞語！"})
+					// Message({status: "success", msg: "恭喜，成功定義你的詞語！"})
 					setVocab("")
 					setExplanation("")
 					setExample("")
+					return(
+						history.push({
+							pathname: '/add/success',
+							state: { pen: check.state.pen ,name:check.state.name, email:check.state.email }
+						})
+						// <Redirect exact={true} from="/add" to={{
+						// 	pathname:"/add/success", 
+						// 	state:{ pen: check.state.pen ,name:check.state.name, email:check.state.email}
+						// }} />
+					)
 				}
 			}
 			else{
