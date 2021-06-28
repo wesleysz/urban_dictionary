@@ -77,8 +77,7 @@ const Card=({post_id, vocabulary,author,explanation,example,tags,agree_users,dis
 		<div className="card">
 			{published!==null?
 			<div className="tags">
-			 	<NavLink to={modifyLink}><Button>修改內容</Button></NavLink>{' '}
-				<PublishBtn Published={published} id={post_id}/>
+				<PublishBtn Published={published} id={post_id} modifyLink={modifyLink}/>
 			</div>
 			:null
 			}
