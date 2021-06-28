@@ -34,9 +34,9 @@ function User ({afunction,hi}){
 		<div id="user">
 			<div className="component" >
 				<div className="padding"/>
-				<div className="title">
-					{name}，你目前的筆名為"{Pen}"
-				</div>
+					<div className="title">
+						{name}，你目前的筆名為"{Pen}"
+					</div>
 				{changePenName?
 					<Input.Search
 						color="aliceblue"
@@ -66,18 +66,14 @@ function User ({afunction,hi}){
 					</Button>
 				}
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
-				<div className="padding"/>
 				
 				{(Pen!=='[你尚未設定筆名]')?
 					<UserCards pEnName={Pen} /> :
-					<p></p>
+					null
 				}
-				{showMsg?<p className="msg">{Msg}</p>:<p className="msg"/>}
-			
-				{(Pen!=='[你尚未設定筆名]')?<UserCards pEnName={Pen} />:null}
 				<div className="padding"/>
-				</div>
 			</div>
+		</div>
 		</>
 	);
 }
