@@ -11,6 +11,10 @@ const Cards=({data})=>{
 	}
 	let list=[];
 	let num=data.length;
+	const cmp=(a,b)=>{
+		let numa=a.props.agree_users.length-a.props.disagree_users.length,numb=b.props.agree_users.length-b.props.disagree_users.length;
+		return numb-numa;
+	}
 	for(let i=0;i < num;i++){
 		// if(data[i].if_publish){ 
 		// 	list.push(<p className="if_publish">(已發佈)</p>)
@@ -35,6 +39,8 @@ const Cards=({data})=>{
 			/>
 		);
 	}
+	console.log(list);
+	list.sort(cmp);
 	return (
 		<div>
 			{list}

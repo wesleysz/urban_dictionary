@@ -13,7 +13,7 @@ const Define=()=>{
 	const userInfo = useContext(UserInfo);
 	userInfo.setHideInput(false);
 
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: term},fetchPolicy: "cache-and-network"});
+	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: term},fetchPolicy: "network-only"});
 	useEffect(()=>{
 		if(data) setList(data.queryByVocabulary);
 		return(()=>{

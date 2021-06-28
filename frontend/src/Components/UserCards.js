@@ -32,7 +32,7 @@ const UserCards=()=>{
 	}
 	return(
 		<div className="title">
-			你目前定義過的字詞：
+			你目前定義過{data.queryMyPost.length}ㄍ字詞：
 			<div className="footer" style={{height:"2rem"}}/>
 			<Cards data={data.queryMyPost} />
 		</div>
