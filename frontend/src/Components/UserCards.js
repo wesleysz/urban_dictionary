@@ -9,7 +9,8 @@ const UserCards=(eMail)=>{
 	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "cache-and-network"});
 
 	useEffect(()=>{
-		if(data) setList(data.queryMyPost);
+		if(data) {setList(data.queryMyPost);
+		console.log(data.queryMyPost);}
 		return(()=>{
 			console.log('home unmouted')
 		})
@@ -23,7 +24,7 @@ const UserCards=(eMail)=>{
 			<div className="title">
 				你目前定義過的單字：
 				<div className="footer" style={{height:"2rem"}}/>
-				<p>loading...</p>
+				<p>載入中...</p>
 			</div>
 		)
 	}

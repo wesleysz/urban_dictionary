@@ -132,13 +132,14 @@
 }
 
 .card .tags{
-  padding-right: 1.25rem;
+  padding-right: 1rem;
   font-style:oblique;
   /* right: 2.3em; */
   text-align: right;
 }
 
-.card .vocab{
+.card .vocab {
+  display: justify;
   padding-left: 1.4rem;
   margin-bottom: 2em;
   height: auto;
@@ -167,6 +168,7 @@
   text-align: left;
 }
 
+
 .card .card-footer{
   display: inline-block;
   padding:1.25rem;
@@ -179,7 +181,7 @@
   text-align: left;
 }
 
-.card .card-footer .text{
+.card  .text{
   font-weight:bold; 
   text-align: right;
   padding-bottom: 1rem;

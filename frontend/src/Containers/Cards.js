@@ -19,7 +19,7 @@ const Cards=({data})=>{
 		// else{
 		// 	list.push(<p className="if_publish">(未發佈)</p>)
 		// }
-
+		console.log(i,data[i].if_publish)
 		list.push(
 			<Card 
 				vocabulary={data[i].vocabulary}
@@ -30,6 +30,7 @@ const Cards=({data})=>{
 				agree_users={data[i].agree_users}
 				disagree_users={data[i].disagree_users}
 				create_date={data[i].create_date}
+				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
 				key={i}
 			/>
 		);

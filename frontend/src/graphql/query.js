@@ -92,6 +92,7 @@ const QUE_QUERY_MY_POST=gql`
 				name,
 				penName
 			},
+			if_publish,
 			vocabulary,
 			explanation,
 			example,

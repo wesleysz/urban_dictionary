@@ -6,12 +6,16 @@ import { Space, Input, Button } from 'antd';
 import { NavLink} from "react-router-dom";
 
 
-const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
+const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date,published})=>{
 	let vocabLink="/define/"+vocabulary;
 	let authorLink="/author/"+author.penName;
+	const pubClass = published!==null?"-pub":"";
 	return (
 		<div className="card">
-			{/*<div className="tags">#tag1 #tag2</div>*/}
+			{published!==null?
+			<div className="tags"><Button>{published?"點我下架":"點我發布"}</Button></div>
+			:null
+			}
 			<div className="vocab">
 				<p className="word"><NavLink to={vocabLink}>{vocabulary}</NavLink></p>
 			</div>
