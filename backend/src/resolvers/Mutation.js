@@ -106,13 +106,13 @@ const Mutation = {
                 { $set: {if_publish: false} }
             );
             if(res["nModified"] === 1){
-                return {success:true, message:'Successfully unpublish.'}
+                return {success:true, message:'成功隱藏'}
             }
             else{
-                return {success:false, message:'Post id does not exist.'}
+                return {success:false, message:'隱藏失敗'}
             }
         } catch (e) {
-            return {success:false, message:'Post id does not exist.'}
+            return {success:false, message:'DB error'}
         }
     },
 
@@ -123,13 +123,13 @@ const Mutation = {
                 { $set: {if_publish: true} }
             );
             if(res["nModified"] === 1){
-                return {success:true, message:'Successfully publish.'}
+                return {success:true, message:'成功發布'}
             }
             else{
-                return {success:false, message:'Post id does not exist.'}
+                return {success:false, message:'發布失敗'}
             }
         } catch (e) {
-            return {success:false, message:'Post id does not exist.'}
+            return {success:false, message:'DB error'}
         }
     }, 
 

@@ -6,7 +6,7 @@ import {QUE_QUERY_MY_POST } from "../graphql"
 const UserCards=(eMail)=>{
 	const [List, setList] = useState([]);
 	console.log("eMail",eMail.eMail);
-	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "cache-and-network"});
+	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "network-only"});
 
 	useEffect(()=>{
 		if(data) {setList(data.queryMyPost);

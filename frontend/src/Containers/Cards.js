@@ -31,7 +31,8 @@ const Cards=({data})=>{
 				disagree_users={data[i].disagree_users}
 				create_date={data[i].create_date}
 				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
-				key={i}
+				post_id={data[i]._id}
+				key={data[i]._id}
 			/>
 		);
 	}
