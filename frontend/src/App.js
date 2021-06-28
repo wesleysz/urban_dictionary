@@ -4,6 +4,7 @@ import { NavLink, Switch, Route, BrowserRouter, Redirect, useHistory } from "rea
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
+import NotLoginAdd from "./Components/NotLoginAdd";
 import SuccessAdd from "./Components/SuccessAdd";
 import User from "./Containers/User";
 import Home from "./Containers/Home";
@@ -107,7 +108,7 @@ function App() {
               <Route exact={true} path="/define" component={Define} />
               <Route exact={false} path="/define/:term?" component={Define} />
               <Route exact={true} path="/add" component={Add} />
-              <Route exact={true} path="/add/notLogin" component={NotLogin}/>
+              <Route exact={true} path="/add/notLogin" component={NotLoginAdd}/>
               <Route exact={true} path = "/add/success" component={SuccessAdd}/>
               <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
               <Route exact={true} path="/user/notLogin" component={NotLogin}/>

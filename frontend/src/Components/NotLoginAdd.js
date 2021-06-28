@@ -9,7 +9,7 @@ const NotLogin = ()=>{
 
 	return(
 		userInfo.email?
-			<Redirect exact={true} from="/user/notLogin" to="/user" />
+			<Redirect exact={true} from="/add/notLogin" to="/add" />
 			:
 			<div className="add">
 				<div className="add-close">
