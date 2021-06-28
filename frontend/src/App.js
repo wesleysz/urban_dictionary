@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from "react";
-import { NavLink, Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import { NavLink, Switch, Route, BrowserRouter, Redirect, useHistory } from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -50,7 +50,8 @@ function App() {
     setuserpenName(data.userLogin.penName)
 	}
 
-	return (
+
+  return (
 		<BrowserRouter>
       <div className="background">
         <div className="header">
@@ -71,7 +72,7 @@ function App() {
             <Route render={({history})=>(
               <Input.Search
                 className="search-bar"
-                placeholder="嗨？"
+                placeholder="嗨？ 想找甚麼ㄋ？"
                 allowClear
                 enterButton="搜尋"
                 size="large"
