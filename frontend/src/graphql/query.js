@@ -83,4 +83,24 @@ const QUE_RANDOM_FIVE_POSTS=gql`
 	}
 `;
 
-export {QUE_QUERY_BY_STRING, QUE_QUERY_BY_VOCABULARY, QUE_QUERY_BY_USER, QUE_RANDOM_FIVE_POSTS};
+const QUE_QUERY_MY_POST=gql`
+	query queryMyPost($email: String!){
+		queryMyPost(email: $email){
+			_id,
+			author{
+				_id,
+				name,
+				penName
+			},
+			vocabulary,
+			explanation,
+			example,
+			tags,
+			agree_users,
+			disagree_users,
+			create_date
+		}
+	}
+`;
+
+export {QUE_QUERY_BY_STRING, QUE_QUERY_BY_VOCABULARY, QUE_QUERY_BY_USER, QUE_RANDOM_FIVE_POSTS, QUE_QUERY_MY_POST};

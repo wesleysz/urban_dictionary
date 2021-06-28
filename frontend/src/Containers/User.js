@@ -68,7 +68,7 @@ function User ({afunction,hi}){
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
 				
 				{(Pen!=='[你尚未設定筆名]')?
-					<UserCards pEnName={Pen} /> :
+					<UserCards eMail={email} /> :
 					null
 				}
 				<div className="padding"/>

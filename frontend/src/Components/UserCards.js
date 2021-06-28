@@ -1,15 +1,15 @@
 import React, { useEffect, useState} from "react";
 import Cards from "../Containers/Cards";
 import {useQuery} from '@apollo/react-hooks'
-import {QUE_QUERY_BY_USER } from "../graphql"
+import {QUE_QUERY_MY_POST } from "../graphql"
 
-const UserCards=(pEnName)=>{
+const UserCards=(eMail)=>{
 	const [List, setList] = useState([]);
-	console.log("pEnName",pEnName.pEnName);
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: pEnName.pEnName}, fetchPolicy: "cache-and-network"});
+	console.log("eMail",eMail.eMail);
+	const {loading,error,data}=useQuery(QUE_QUERY_MY_POST,{variables: {email: eMail.eMail}, fetchPolicy: "cache-and-network"});
 
 	useEffect(()=>{
-		if(data) setList(data.queryByUser);
+		if(data) setList(data.queryMyPost);
 		return(()=>{
 			console.log('home unmouted')
 		})
