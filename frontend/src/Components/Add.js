@@ -22,6 +22,14 @@ const Add = ()=>{
 			<Redirect exact={true} from="/add" to="/add/NotLogin" />
 		)
 	}
+	if(!check.state.pen){
+		return(
+			<div className="add-title">
+				你ㄇ有筆名耶
+				<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
+			</div>
+		)
+	}
 	const {email} = check.state;
 
 

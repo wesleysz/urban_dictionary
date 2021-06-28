@@ -60,7 +60,7 @@ function App() {
             </button>
             <div className="row-title-bottons" >
               <Space size={18}>
-              {isLogin?<NavLink to={{pathname:"/add", state:{ email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null}
+              {isLogin?<NavLink to={{pathname:"/add", state:{ pen:userpenName,name:userName,email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null}
               {isLogin?<NavLink to={{pathname:"/user", state:{ pen:userpenName ,name:userName, email:userEmail}}}>
               <Button className="botton">{userName}，你好</Button></NavLink> :null}
             <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
