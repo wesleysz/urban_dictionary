@@ -6,8 +6,7 @@ import { Button } from '@material-ui/core';
 import { useMutation,useQuery } from '@apollo/react-hooks';
 import { MUT_MODIFY_PEN_NAME, MUT_USER_LOGIN,QUE_QUERY_BY_USER } from "../graphql"
 import Message from '../Hooks/Message';
-import Cards from "./Cards";
-import UserCards from "./UserCards";
+import UserCards from "../Components/UserCards";
 
 function User ({afunction,hi}){
 	const [startModPen] = useMutation(MUT_MODIFY_PEN_NAME);
@@ -17,13 +16,12 @@ function User ({afunction,hi}){
 	const [Msg, setMsg]=useState('');
 	const [Pen, setPen]=useState('[你尚未設定筆名]');
 	const [changePenName, setChanegPenName]=useState(false);
-	const [List, setList] = useState([]);
 
 	useEffect(()=>{if(check.state && check.state.pen)setPen(check.state.pen); return(()=>{console.log("unmountede",hi)})},[check])
 	if(!check.state){
-		// return(
-		// 	<Redirect exact={true} from="/user" to="/" />
-		// )
+		return(
+			<Redirect exact={true} from="/user" to="/user/notLogin" />
+		)
 	}
 	const { name, email} = check.state;
 	return(
@@ -36,9 +34,9 @@ function User ({afunction,hi}){
 		<div id="user">
 			<div className="component" >
 				<div className="padding"/>
-				<div className="title">
-					{name}，你目前的筆名為"{Pen}"
-				</div>
+					<div className="title">
+						{name}，你目前的筆名為"{Pen}"
+					</div>
 				{changePenName?
 					<Input.Search
 						color="aliceblue"
@@ -68,15 +66,14 @@ function User ({afunction,hi}){
 					</Button>
 				}
 				{showMsg?<p className="msg">{Msg}</p>:<p className="msg" style={{height:"25px"}}/>}
-				<div className="padding"/>
 				
 				{(Pen!=='[你尚未設定筆名]')?
 					<UserCards pEnName={Pen} /> :
-					<p></p>
+					null
 				}
 				<div className="padding"/>
-				</div>
 			</div>
+		</div>
 		</>
 	);
 }

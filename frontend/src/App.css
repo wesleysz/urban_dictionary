@@ -192,12 +192,13 @@
   width: auto;
 }
 
-.loading{
-  margin-top: 1rem;
-  color: #f6f9fa;
+#general-title{
   text-align: center;
-  font-size: 22px;
+  margin-top: 3.3rem;  
+  /* text-transform: uppercase; */
+  color: #FFFFFF;
   font-weight: 600;
+  font-size: 24px;
 }
 
 /* Add Page */
@@ -322,7 +323,8 @@
 
 #user .component .msg{
   margin-top: 0.3rem;
-  color: #5383a5;
-  font-size: 16px;
-  font-weight: 600;
+  color: #3a83ad;
+  font-size: 15px;
+  /* font-weight: 600; */
 }
+

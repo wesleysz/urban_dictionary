@@ -3,8 +3,6 @@ import { NavLink, Switch, Route, Redirect,  useLocation } from "react-router-dom
 import { useMutation } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
 import {MUT_CREATE_POST} from '../graphql';
-
-import {Cancel} from '@material-ui/icons';
 import {IconButton, Button} from '@material-ui/core';
 import {Input} from 'antd';
 
@@ -49,7 +47,7 @@ const Add = ()=>{
 
 
 	const handleCreate = async ()=>{
-		let msg = "請填寫"
+		let msg = "請填寫 "
 		let ok = true;
 		if(vocab.length === 0){
 			msg += "   詞語"

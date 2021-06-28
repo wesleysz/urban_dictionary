@@ -1,18 +1,10 @@
-import React, { useEffect, useState} from "react";
-import { NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
-import GoogleBtn from "../Components/GoogleBtn"
+import React, { useEffect, useState } from "react";
 import Cards from "../Containers/Cards";
-import icon from "../imgs/icon.png";
-import {Typography, Button} from '@material-ui/core';
-import {ThumbUp, ThumbDown} from '@material-ui/icons';
-import { Space, Input } from 'antd';
-import {useQuery} from '@apollo/react-hooks'
-import {QUE_RANDOM_FIVE_POSTS} from "../graphql/index";
+import { useQuery } from '@apollo/react-hooks'
+import { QUE_RANDOM_FIVE_POSTS } from "../graphql";
 
 const Home=()=>{
 	const [List, setList] = useState([]);
-	const check = useLocation();
-	console.log("check",check);
 	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}, fetchPolicy: "cache-and-network"});
 	useEffect(()=>{
 		if(data) setList(data.randomFivePosts);
@@ -20,20 +12,20 @@ const Home=()=>{
 			console.log('home unmouted')
 		})
 	},[data]);
-	//refetch();
 	console.log("data",data);
 	console.log("error",error);
 	console.log("loading",loading);
 	if(!data){
 		return(
 			<div id="content">
-				<p className="loading">loading...</p>
+			<p id="general-title">載入中...</p>
 			</div>
 		)
 	}
 	return(
 		<div id="content">
-			<div className="footer" />
+			{/* <div className="footer" /> */}
+			<p id="general-title">你可能會想知道：</p>
 			<Cards data={List}/>
 		</div>
 	)

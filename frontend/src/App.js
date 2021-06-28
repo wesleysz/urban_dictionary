@@ -1,7 +1,6 @@
 import './App.css';
-import React, { useEffect } from "react";
-import {useState} from 'react';
-import { NavLink, Switch, Route, BrowserRouter, Redirect, Link, useLocation} from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
@@ -12,11 +11,10 @@ import Define from "./Containers/Define";
 import GoogleBtn from "./Components/GoogleBtn"
 import icon from "./imgs/icon.png";
 import Message from './Hooks/Message';
-import {MUT_USER_LOGIN} from "./graphql"
-import { Button} from '@material-ui/core';
+import { MUT_USER_LOGIN } from "./graphql"
+import { Button } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
 import { Space, Input } from 'antd';
-// import location from "Document";
 
 function App() {
   const [startLogin] = useMutation(MUT_USER_LOGIN)
@@ -26,11 +24,9 @@ function App() {
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
-  // const check = useLocation();
-  // console.log(check);
+
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
-    // console.log("profile",profile);
 		setuserName(profile.getName());
 		setuserEmail(profile.getEmail());
     setImageUrl(profile.getImageUrl());
@@ -38,6 +34,7 @@ function App() {
     const {data} = await startLogin({variables:{name:profile.getName(), email:profile.getEmail()}})
     setuserpenName(data.userLogin.penName)
   }
+
 	const logout =  () => {
 		setuserName("");
     setuserEmail("");
@@ -50,7 +47,6 @@ function App() {
   const queryAgain = async () => {
 		const {data} = await startLogin({variables:{name:userName, email:userEmail}})
     setuserpenName(data.userLogin.penName)
-    //console.log("was clled")
 	}
 
 	return (
@@ -83,7 +79,11 @@ function App() {
                   setSearchWord(e.target.value);
                 }}
                 onSearch={(term)=>{
-          				let path="/define/"+term;
+          				if(term.length===0){
+                    Message({status:'warning', msg:"請輸入搜尋內容！"})
+                    return;
+                  }
+                  const path="/define/"+term;
           				history.push(path);
                   setSearchWord("");
                 }}
@@ -98,6 +98,7 @@ function App() {
             <Route exact={true} path="/add" component={Add} />
             <Route exact={true} path="/add/notLogin" component={NotLogin}/>
             <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
+            <Route exact={true} path="/user/notLogin" component={NotLogin}/>
             <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/author" component={Author} />
             <Route exact={false} path="/author/:penname?" component={Author} />
