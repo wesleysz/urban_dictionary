@@ -25,6 +25,8 @@ function App() {
   const [userpenName, setuserpenName]=useState(undefined);
   const [searchWord, setSearchWord]=useState("");
 	const [isLogin, setisLogin]=useState(false);
+  // const check = useLocation();
+  // console.log(check);
 	const  login = async (googleUser) =>{
 		const profile = googleUser.getBasicProfile();
 		setuserName(profile.getName());
@@ -95,6 +97,7 @@ function App() {
             <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
             <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/author" component={Author} />
+            <Route exact={false} path="/author/:penname?" component={Author} />
             <Redirect exact={true} from="/home" to="/" />
           </Switch>
         <div className="footer" />

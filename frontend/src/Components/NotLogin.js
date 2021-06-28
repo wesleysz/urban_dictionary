@@ -1,8 +1,10 @@
-import { NavLink} from "react-router-dom";
+import { NavLink,useLocation } from "react-router-dom";
 import { Button} from '@material-ui/core';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 
 const NotLogin = ()=>{
+	const check=useLocation();
+	console.log(check);
 	return(
 		<div className="add">
 			<div className="add-close">

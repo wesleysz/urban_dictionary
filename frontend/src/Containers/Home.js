@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from "react";
-import {useState} from 'react';
-import { NavLink, Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import { NavLink, Switch, Route, Redirect,useLocation } from "react-router-dom";
 import GoogleBtn from "../Components/GoogleBtn"
 import Cards from "../Containers/Cards";
 import icon from "../imgs/icon.png";
@@ -12,8 +11,15 @@ import {QUE_RANDOM_FIVE_POSTS} from "../graphql/index";
 
 const Home=()=>{
 	const [List, setList] = useState([]);
+	const check = useLocation();
+	console.log("check",check);
 	const {loading,error,data}=useQuery(QUE_RANDOM_FIVE_POSTS,{variables: {number: 0}, fetchPolicy: "cache-and-network"});
-	useEffect(()=>{if(data) setList(data.randomFivePosts);return(()=>{console.log('home unmouted')})},[data])
+	useEffect(()=>{
+		if(data) setList(data.randomFivePosts);
+		return(()=>{
+			console.log('home unmouted')
+		})
+	},[data]);
 	//refetch();
 	console.log("data",data);
 	console.log("error",error);

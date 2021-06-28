@@ -8,13 +8,14 @@ import { NavLink} from "react-router-dom";
 
 const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_users,create_date})=>{
 	let vocabLink="/define/"+vocabulary;
+	let authorLink="/author/"+author.penName;
 	return (
 		<div className="card">
 			{/*<div className="tags">#tag1 #tag2</div>*/}
 			<NavLink to={vocabLink}>
-			<div className="vocab">
-				<a className="word">{vocabulary}</a>
-			</div>
+				<div className="vocab">
+					<a className="word">{vocabulary}</a>
+				</div>
 			</NavLink>
 			<div className="meaning">釋義：{explanation}</div>
 			<div className="example">例句：{example}</div>
@@ -34,7 +35,9 @@ const Card=({vocabulary,author,explanation,example,tags,agree_users,disagree_use
 				</Button>
 			</div>
 			<div className="card-footer" > 
-				<div className="text">由 {author.penName}</div>
+				<div className="text">由 
+					<NavLink to={authorLink}>{author.penName}</NavLink>
+				</div>
 				<div className="text">創建於 {create_date}</div>
 			</div>
 		</div>
