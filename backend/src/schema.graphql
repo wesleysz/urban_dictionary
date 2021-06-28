@@ -14,6 +14,7 @@ type Query{
     queryByString( str: String! ): [Post!]
     queryByUser( penName: String! ): [Post!]
     queryByVocabulary( vocabulary: String! ): [Post!]
+    queryMyPost( email: String!): [Post!]
     randomFivePosts(number: Int): [Post!]
 }
 

@@ -54,6 +54,14 @@ const Query = {
         }
     },
 
+    async queryMyPost( parent, {email}, { db }, info ){
+        const author_id = await db.UserModel.findOne({email: email})
+        const res =  await db.PostModel.find( 
+            { author: author_id} 
+        );
+        return res
+    },
+
     async randomFivePosts( parent, args, { db }, info ){
 
         return await db.PostModel.aggregate([
