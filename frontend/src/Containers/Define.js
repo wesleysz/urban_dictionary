@@ -1,13 +1,14 @@
-import React, { useEffect, useState} from "react";
-import {useQuery} from '@apollo/react-hooks'
-
+import React, { useEffect, useState } from "react";
+import { useQuery } from '@apollo/react-hooks'
+import { useParams } from 'react-router-dom'
 import Cards from "../Containers/Cards";
-import {QUE_QUERY_BY_VOCABULARY} from "../graphql/index";
+import { QUE_QUERY_BY_VOCABULARY } from "../graphql";
 
-const Define=(props)=>{
+const Define=()=>{
 	const [List, setList] = useState([]);
-	console.log(props.match.params.term);
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: props.match.params.term},fetchPolicy: "cache-and-network"});
+	const { term } = useParams();
+	console.log(term);
+	const {loading,error,data}=useQuery(QUE_QUERY_BY_VOCABULARY,{variables: {vocabulary: term},fetchPolicy: "cache-and-network"});
 	useEffect(()=>{
 		if(data) setList(data.queryByVocabulary);
 		return(()=>{
@@ -21,13 +22,14 @@ const Define=(props)=>{
 	if(!data){
 		return(
 			<div id="content">
-				<p>loading...</p>
+				<p id="general-title">載入中...</p>
 			</div>
 		)
 	}
 	return(
 		<div id="content">
-			<Cards data={data.queryByVocabulary}/>
+			<p id="general-title">{term}的相關結果：</p>
+			<Cards data={List}/>
 		</div>
 	)
 };

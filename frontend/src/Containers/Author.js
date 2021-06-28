@@ -1,13 +1,14 @@
-import React, { useEffect, useState} from "react";
-import {useQuery} from '@apollo/react-hooks'
-
+import React, { useEffect, useState } from "react";
+import { useQuery } from '@apollo/react-hooks'
+import { useParams } from 'react-router-dom'
 import Cards from "../Containers/Cards";
-import {QUE_QUERY_BY_USER} from "../graphql/index";
+import { QUE_QUERY_BY_USER } from "../graphql";
 
-const Author=(props)=>{
+const Author=()=>{
 	const [List, setList] = useState([]);
-	console.log(props.match.params.term);
-	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: props.match.params.penname},fetchPolicy: "cache-and-network"});
+	const { penname : penName }= useParams();
+	console.log(penName);
+	const {loading,error,data}=useQuery(QUE_QUERY_BY_USER,{variables: {penName: penName},fetchPolicy: "cache-and-network"});
 	useEffect(()=>{
 		if(data) setList(data.queryByUser);
 		return(()=>{
@@ -21,13 +22,14 @@ const Author=(props)=>{
 	if(!data){
 		return(
 			<div id="content">
-				<p>loading...</p>
+				<p id="general-title">載入中...</p>
 			</div>
 		)
 	}
 	return(
 		<div id="content">
-			<Cards data={data.queryByUser}/>
+			<p id="general-title">{penName}的相關結果：</p>
+			<Cards data={List}/>
 		</div>
 	)
 }

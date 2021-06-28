@@ -306,3 +306,12 @@
   font-size: 15px;
   /* font-weight: 600; */
 }
+
+#general-title{
+  margin-bottom: 2rem;  
+  text-align: center;
+  /* text-transform: uppercase; */
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 30px;
+}
