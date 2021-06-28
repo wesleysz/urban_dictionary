@@ -133,17 +133,23 @@ const Mutation = {
         }
     }, 
 
-    async addAgree( parent, {post_id, email}, { db }, info ){
+    async clickAgree( parent, {post_id, email}, { db }, info ){
         const post = await db.PostModel.findById(post_id)
         let disagree = [... post['disagree_users']]
         let agree = [... post['agree_users']]
 
-        const index = disagree.indexOf(email);
-        if (index !== -1){
-            disagree.splice(index, 1);
-        }
+        const index_d = disagree.indexOf(email);
         const index_a = agree.indexOf(email);
-        if(index_a === -1){
+        // 原本在 A => 收回
+        if(index_a !== -1){
+            agree.splice(index_a, 1);
+        }
+        else{
+            // 原本在 D => 刪 D
+            if (index_d !== -1){
+                disagree.splice(index_d, 1);
+            }
+            // 增 A
             agree.push(email)
         }
 
@@ -153,27 +159,33 @@ const Mutation = {
                 { $set: {agree_users: agree, disagree_users: disagree} }
             );
             if(res["nModified"] === 1){
-                return {success:true, agree_cnt: agree.length, disagree_cnt: disagree.length }
+                return {success:true, agree_users: agree, disagree_users: disagree}
             }
             else{
-                return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+                return {success:false,agree_users: agree, disagree_users: disagree }
             }
         } catch (e) {
-            return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            return {success:false, agree_users: agree, disagree_users: disagree }
         }
     },
 
-    async addDisagree( parent, {post_id, email}, { db }, info ){
+    async clickDisagree( parent, {post_id, email}, { db }, info ){
         const post = await db.PostModel.findById(post_id)
         let disagree = [... post['disagree_users']]
         let agree = [... post['agree_users']]
 
-        const index = agree.indexOf(email);
-        if (index !== -1){
-            agree.splice(index, 1);
-        }
         const index_d = disagree.indexOf(email);
-        if(index_d === -1){
+        const index_a = agree.indexOf(email);
+        // 原本在 D => 收回
+        if(index_d !== -1){
+            disagree.splice(index_d, 1);
+        }
+        else{
+            // 原本在 A => 刪 A
+            if (index_a !== -1){
+                agree.splice(index_a, 1);
+            }
+            // 增 D
             disagree.push(email)
         }
 
@@ -183,13 +195,13 @@ const Mutation = {
                 { $set: {agree_users: agree, disagree_users: disagree} }
             );
             if(res["nModified"] === 1){
-                return {success:true, agree_cnt: agree.length, disagree_cnt: disagree.length }
+                return {success:true, agree_users: agree, disagree_users: disagree }
             }
             else{
-                return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+                return {success:false, agree_users: agree, disagree_users: disagree }
             }
         } catch (e) {
-            return {success:false, agree_cnt: agree.length, disagree_cnt: disagree.length }
+            return {success:false, agree_users: agree, disagree_users: disagree }
         }
     },
 
