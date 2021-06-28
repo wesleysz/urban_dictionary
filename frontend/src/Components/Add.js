@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { NavLink, Redirect,  useLocation, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useLocation, useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Message from '../Hooks/Message';
 import { MUT_CREATE_POST } from '../graphql';
@@ -22,7 +22,7 @@ const Add = ()=>{
 	console.log("[User] UserInfo", userInfo);
 	if(!userInfo.email){
 		return(
-			<Redirect exact={true} from="/add" to="/add/notLogin" />
+			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin",state:{wordToBeDefine: check.state.wordToBeDefine}}} />
 		)
 	}
 	// if(!check.state){
