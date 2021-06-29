@@ -1,28 +1,23 @@
-import React from 'react';
-import {useQuery,useLazyQuery} from '@apollo/react-hooks'
+import React from "react";
+import {useQuery,useLazyQuery} from "@apollo/react-hooks";
+
 import Card from "../Components/Card";
 
-
-const Cards=({data})=>{
+const Cards = ({data}) => {
 	if(!data.length){
 		return(
 			<div><p id="general-title">σ`∀´)σㄇ有東東</p></div>
 		);
 	}
-	let list=[];
-	let num=data.length;
-	const cmp=(a,b)=>{
-		let numa=a.props.agree_users.length-a.props.disagree_users.length,numb=b.props.agree_users.length-b.props.disagree_users.length;
-		return numb-numa;
+	let list = [];
+	let num = data.length;
+	const cmp = (a, b) => {
+		let numa = a.props.agree_users.length - a.props.disagree_users.length;
+		let numb = b.props.agree_users.length - b.props.disagree_users.length;
+		return numb - numa;
 	}
-	for(let i=0;i < num;i++){
-		// if(data[i].if_publish){ 
-		// 	list.push(<p className="if_publish">(已發佈)</p>)
-		// }
-		// else{
-		// 	list.push(<p className="if_publish">(未發佈)</p>)
-		// }
-		console.log(i,data[i].if_publish)
+	for(let i = 0; i < num; i++){
+		console.log(i,data[i].if_publish);
 		list.push(
 			<Card 
 				vocabulary={data[i].vocabulary}
@@ -33,7 +28,7 @@ const Cards=({data})=>{
 				agree_users={data[i].agree_users}
 				disagree_users={data[i].disagree_users}
 				create_date={data[i].create_date}
-				published={(data[i].if_publish===true || data[i].if_publish===false)?data[i].if_publish:null}
+				published={(data[i].if_publish === true || data[i].if_publish === false) ? data[i].if_publish : null}
 				post_id={data[i]._id}
 				key={data[i]._id}
 			/>

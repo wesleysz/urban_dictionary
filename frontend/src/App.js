@@ -39,7 +39,7 @@ function App() {
 		setuserEmail(profile.getEmail());
     setImageUrl(profile.getImageUrl());
 		setisLogin(true);
-    const {data} = await startLogin({ variables: { name: profile.getName(), email: profile.getEmail() } });
+    const {data} = await startLogin({variables: {name: profile.getName(), email: profile.getEmail()}});
     setuserpenName(data.userLogin.penName);
   }
 
@@ -48,46 +48,14 @@ function App() {
     setuserEmail("");
 		setisLogin(false);
     setuserpenName(undefined);
-    Message({ status: "success", msg: "登出成功！" });
+    Message({status: "success", msg: "登出成功！"});
     <Redirect exact={true} from="/user" to="/home" />
 	}
 
   const queryAgain = async () => {
-		const {data} = await startLogin({ variables: { name: userName, email: userEmail } });
+		const {data} = await startLogin({variables: {name: userName, email: userEmail}});
     setuserpenName(data.userLogin.penName);
 	}
-
-  // const searchResult=(value)=>
-  //   new 
-    // const {loading,error,data}=useQuery(QUE_QUERY_BY_SRTING,{variables: {str: value},fetchPolicy: "cache-and-network"});
-    // const {loading,error,data}=client.query({
-    //   query:QUE_QUERY_BY_STRING,
-    //   variables:{str:value}
-    // })
-    // if(loading){
-    //   return{
-    //     value: value,
-    //     label: (
-    //       <div>loading...</div>
-    //     )
-    //   }
-    // }
-    // let res=[];
-    // for(let i=0;i<data.queryByString.length;i++){
-    //   res.push({
-    //     value: value,
-    //     label: (
-    //       <div>{data.queryByString[i].vocabulary}</div>
-    //     )
-    //   })
-    // }
-  
-
-  const tryToSearch=(value)=>{
-    // setOption(value?searchResult(value):[]);
-    setOption([value,value,value].join(".").split("."));
-  }
-  
 
   return (
 		<BrowserRouter>
@@ -96,72 +64,76 @@ function App() {
           <div className="header">
             <div className="row-title">
               <button className="homeBtn">
-                <NavLink className="homeBtn" to={{pathname:"/home", state:{ email: (isLogin? userEmail:null)}}}><img id="icon" src={icon} /></NavLink>
+                <NavLink className="homeBtn" to={{pathname: "/home", state: {email: (isLogin ? userEmail : null)}}}><img id="icon" src={icon} /></NavLink>
               </button>
-              <div className="row-title-bottons" >
+              <div className="row-title-bottons">
                 <Space size={18}>
-                {isLogin?<NavLink to={{pathname:"/add", state:{ pen:userpenName,name:userName,email:userEmail}}}><Button className="botton" >我要定義詞語</Button></NavLink>:null}
-                {isLogin?<NavLink to={{pathname:"/user", state:{ pen:userpenName ,name:userName, email:userEmail}}}>
-                <Button className="botton">{userName} <img id="profileImage" src={imageUrl} /></Button></NavLink> :null}
-              <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
+                  {isLogin
+                    ? <NavLink to="/add"><Button className="botton">我要定義詞語</Button></NavLink>
+                    : null
+                  }
+                  {isLogin
+                    ? <NavLink to="/user"><Button className="botton">{userName}<img id="profileImage" src={imageUrl} /></Button></NavLink>
+                    : null
+                  }
+                  <GoogleBtn className="botton" login={login} logout={logout} isLogined={isLogin}></GoogleBtn>
                 </Space>
               </div>
             </div>
-            {hideInput?
-              <></> :
-              <div className="row-bar" >
-                <Route render={({history})=>(
+            {hideInput
+              ? <></>
+              : <div className="row-bar">
+                <Route render={({history}) => (
                   <Input.Search
                     className="search-bar"
                     placeholder="嗨？ 想找甚麼ㄋ？"
                     enterButton="搜尋"
                     size="large"
                     value={searchWord}
-                    onChange={(e)=>{
+                    onChange={(e) => {
                       setSearchWord(e.target.value);
                     }}
-                    onSearch={(term)=>{
+                    onSearch={(term) => {
                       if(term.length===0){
-                        Message({status:'warning', msg:"請輸入搜尋內容！"})
+                        Message({status: "warning", msg: "請輸入搜尋內容！"});
                         return;
                       }
-                      const path="/define/"+term;
+                      const path = "/define/" + term;
                       history.push({
                         pathname: path,
                         state: {
                           pen: userpenName,
                           name: userName,
-                          email: userEmail
-                        }
+                          email: userEmail,
+                        },
                       });
                       setSearchWord("");
                     }}
                   ></Input.Search>
-                )}/>
+                )} />
               </div>
             }
-            </div>
-            <Switch>
-              <Route exact={true} path="/login" component={LogIn} />
-              <Route exact={true} path="/define" component={Define} />
-              <Route exact={false} path="/define/:term?" component={Define} />
-              <Route exact={true} path="/add" component={Add} />
-              <Route exact={true} path="/add/notLogin" component={NotLoginAdd}/>
-              <Route exact={true} path = "/add/success" component={SuccessAdd}/>
-              <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
-              <Route exact={true} path="/user/notLogin" component={NotLogin}/>
-              <Route exact={true} path="/" component={Home} />
-              <Route exact={true} path="/author" component={Author} />
-              <Route exact={false} path="/author/:penname?" component={Author} />
-              <Route exact={true} path="/user" component={Modify} />
-              <Route exact={false} path="/user/:postid?" component={Modify} />
-              <Redirect exact={true} from="/home" to="/" />
-            </Switch>
+          </div>
+          <Switch>
+            <Route exact={true} path="/define" component={Define} />
+            <Route exact={false} path="/define/:term?" component={Define} />
+            <Route exact={true} path="/add" component={Add} />
+            <Route exact={true} path="/add/notLogin" component={NotLoginAdd} />
+            <Route exact={true} path = "/add/success" component={SuccessAdd} />
+            <Route exact={true} path="/user" render={()=>(<User afunction={queryAgain} />)} />
+            <Route exact={true} path="/user/notLogin" component={NotLogin} />
+            <Route exact={true} path="/" component={Home} />
+            <Route exact={true} path="/author" component={Author} />
+            <Route exact={false} path="/author/:penname?" component={Author} />
+            <Route exact={true} path="/user" component={Modify} />
+            <Route exact={false} path="/user/:postid?" component={Modify} />
+            <Redirect exact={true} from="/home" to="/" />
+          </Switch>
           <div className="footer" />
         </div>
       </UserInfo.Provider>
 		</BrowserRouter>     
 	);
 }
-export default App;
 
+export default App;

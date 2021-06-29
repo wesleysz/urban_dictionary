@@ -1,17 +1,17 @@
 import { useState, useContext } from "react";
 import { NavLink, Redirect, useLocation, useHistory } from "react-router-dom";
-import { useMutation } from '@apollo/react-hooks';
-import Message from '../Hooks/Message';
-import { MUT_CREATE_POST } from '../graphql';
-import { Button } from '@material-ui/core';
-import { Input } from 'antd';
-import { UserInfo } from '../App'
+import { useMutation } from "@apollo/react-hooks";
+import { Button } from "@material-ui/core";
+import { Input } from "antd";
 
-const Add = ()=>{
+import { UserInfo } from "../App";
+import Message from "../Hooks/Message";
+import { MUT_CREATE_POST } from "../graphql";
+
+const Add = () => {
 	const [vocab, setVocab] = useState("");
 	const [explanation, setExplanation] = useState("");
 	const [example, setExample] = useState("");
-
 	const [addPost] = useMutation(MUT_CREATE_POST);
 	
 	let history = useHistory();
@@ -22,18 +22,9 @@ const Add = ()=>{
 	console.log("[User] UserInfo", userInfo);
 	if(!userInfo.email){
 		return(
-			<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin",state:{wordToBeDefine: check.state.wordToBeDefine}}} />
-		)
+			<Redirect exact={true} from="/add" to={{pathname: "/add/notLogin", state: {wordToBeDefine: check.state.wordToBeDefine}}} />
+		);
 	}
-	// if(!check.state){
-		
-	// }
-	// if(check.state.email.length === 0){
-	// 	return(
-	// 		<Redirect exact={true} from="/add" to={{pathname:"/add/notLogin", state:{ pen:null ,name:null, email:null}}} />
-	// 	)
-	// }
-	// console.log("[Add]", check.state.email, check.state.name, check.state.pen)
 	if(!userInfo.penName){
 		return(
 			<div className="add">
@@ -42,68 +33,38 @@ const Add = ()=>{
 						<Button variant="contained" color="primary" className="botton" >回首頁</Button>
 					</NavLink>
 				</div>
-				<div className="add-title" style={{marginTop:"5rem"}}>
+				<div className="add-title" style={{marginTop: "5rem"}}>
 					<p>你還ㄇ有筆名ㄝ！</p>
 					<NavLink to="/user">
 						{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
-						<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
+						<u style={{color: "#cbdce7", fontSize: "24px"}}>新增筆名</u>
 					</NavLink>
 				</div>
 			</div>
-			// <div className="add-title">
-			// 	你ㄇ有筆名耶
-			// 	<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
-			// </div>
-		)
+		);
 	}
-	// if(!check.state.pen){
-	// 	return(
-	// 		<div className="add">
-	// 			<div className="add-close">
-	// 				<NavLink to={{pathname:"/home", state:{ email: check.state.email}}}>
-	// 					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
-	// 				</NavLink>
-	// 			</div>
-	// 			<div className="add-title" style={{marginTop:"5rem"}}>
-	// 				<p>你還ㄇ有筆名ㄝ！</p>
-	// 				<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}>
-	// 					{/* <Button style={{color:"#cbdce7"}}>去加筆名</Button> */}
-	// 					<u style={{color:"#cbdce7", fontSize:"24px"}}>新增筆名</u>
-	// 				</NavLink>
-					
-	// 			</div>
-	// 		</div>
-	// 		// <div className="add-title">
-	// 		// 	你ㄇ有筆名耶
-	// 		// 	<NavLink to={{pathname:"/user", state:{ pen:null ,name:check.state.name, email:check.state.email}}}><Button>去加筆名</Button></NavLink>
-	// 		// </div>
-	// 	)
-	// }
-	// setVocab(check.state.wordToBeDefined);
-	// const {email} = check.state;
 
-
-	const handleCreate = async ()=>{
-		let msg = "請填寫 "
+	const handleCreate = async () => {
+		let msg = "請填寫 ";
 		let ok = true;
 		if(vocab.length === 0){
-			msg += "   詞語"
-			ok = false
+			msg += "   詞語";
+			ok = false;
 		}
 		if(explanation.length === 0){
-			msg += "   解釋"
-			ok = false
+			msg += "   解釋";
+			ok = false;
 		}
 		if(example.length === 0){
-			msg += "   例句"
-			ok = false
+			msg += "   例句";
+			ok = false;
 		}
 		if(!ok){
 			Message({status: "warning", msg});
 		}
 		else{
 			const res = await addPost({
-				variables:{
+				variables: {
 					email: userInfo.email,
 					vocabulary: vocab,
 					explanation,
@@ -113,12 +74,12 @@ const Add = ()=>{
 			if(res.data.createPost){
 				if(res.data.createPost.vocabulary === vocab){
 					// Message({status: "success", msg: "恭喜，成功定義你的詞語！"})
-					setVocab("")
-					setExplanation("")
-					setExample("")
+					setVocab("");
+					setExplanation("");
+					setExample("");
 					return(
 						history.push({
-							pathname: '/add/success',
+							pathname: "/add/success",
 							// state: { pen: check.state.pen ,name:check.state.name, email:check.state.email }
 						})
 						// <Redirect exact={true} from="/add" to={{
@@ -129,24 +90,24 @@ const Add = ()=>{
 				}
 			}
 			else{
-				Message({status: "error", msg:"發生不明錯誤...請再試一次"})
+				Message({status: "error", msg: "發生不明錯誤...請再試一次"});
 			}
 		}
 	}
-	console.log("vocab",vocab);
+	console.log("vocab", vocab);
 	if(check.state){
-		console.log("check.state.wordToBeDefine",check.state.wordToBeDefine);
-		if(vocab!==check.state.wordToBeDefine && check.state.wordToBeDefine!==undefined){
+		console.log("check.state.wordToBeDefine", check.state.wordToBeDefine);
+		if(vocab !== check.state.wordToBeDefine && check.state.wordToBeDefine !== undefined){
 			setVocab(check.state.wordToBeDefine);
 		}
-		check.state=null;
+		check.state = null;
 	}
 
 	return(
 		<div className="add">
 			<div className="add-close">
 				<NavLink to="/home">
-					<Button variant="contained" color="primary" className="botton" >回首頁</Button>
+					<Button variant="contained" color="primary" className="botton">回首頁</Button>
 				</NavLink>
 			</div>
 			<div className="add-title">
@@ -154,11 +115,11 @@ const Add = ()=>{
 			</div>
 			<div className="add-form">
 				<div className="title">想定義什麼詞呢? (必填)</div>
-				<Input placeholder="想定義什麼詞呢?" className="input" value={vocab} onChange={(e) => {setVocab(e.target.value.trim())}}></Input>
+				<Input placeholder="想定義什麼詞呢?" className="input" value={vocab} onChange={(e) => {setVocab(e.target.value.trim());}}></Input>
 				<div className="title">它代表什麼意思? (必填)</div>
-				<Input.TextArea placeholder="它代表什麼意思?" rows={4} className="input" value={explanation} onChange={(e) => {setExplanation(e.target.value.trim())} }></Input.TextArea>
+				<Input.TextArea placeholder="它代表什麼意思?" rows={4} className="input" value={explanation} onChange={(e) => {setExplanation(e.target.value.trim());}}></Input.TextArea>
 				<div className="title">造一個句子吧！ (必填)</div>
-				<Input.TextArea placeholder="造一個句子吧！" rows={2} className="input" value={example} onChange={(e) => {setExample(e.target.value.trim())}} ></Input.TextArea>
+				<Input.TextArea placeholder="造一個句子吧！" rows={2} className="input" value={example} onChange={(e) => {setExample(e.target.value.trim());}} ></Input.TextArea>
 				{/* <div className="title">為它新增一些標籤吧~</div>
 				<Input.TextArea placeholder="為它新增一些標籤吧！" rows={2} className="input"></Input.TextArea> */}
 				<div className="footer">
@@ -166,9 +127,8 @@ const Add = ()=>{
 				</div>
 			</div>
 			<div className="add-close"></div>
-			
 		</div>
 	);
-}
+};
 
 export default Add;
