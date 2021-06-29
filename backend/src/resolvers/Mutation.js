@@ -128,7 +128,7 @@ const Mutation = {
         }
     }, 
 
-    async clickAgree( parent, {post_id, email}, { db }, info ){
+    async clickAgree( parent, {post_id, email}, { db, pubsub }, info ){
         const post = await db.PostModel.findById(post_id)
         let disagree = [... post['disagree_users']]
         let agree = [... post['agree_users']]
@@ -154,7 +154,9 @@ const Mutation = {
                 { $set: {agree_users: agree, disagree_users: disagree} }
             );
             if(res["nModified"] === 1){
-                return {success:true, agree_users: agree, disagree_users: disagree}
+                const to_return = {success:true, agree_users: agree, disagree_users: disagree }
+                pubsub.publish(`${post_id}`, {subscribeCard: to_return} )
+                return to_return;
             }
             else{
                 return {success:false,agree_users: agree, disagree_users: disagree }
@@ -164,7 +166,7 @@ const Mutation = {
         }
     },
 
-    async clickDisagree( parent, {post_id, email}, { db }, info ){
+    async clickDisagree( parent, {post_id, email}, { db, pubsub }, info ){
         const post = await db.PostModel.findById(post_id)
         let disagree = [... post['disagree_users']]
         let agree = [... post['agree_users']]
@@ -190,7 +192,9 @@ const Mutation = {
                 { $set: {agree_users: agree, disagree_users: disagree} }
             );
             if(res["nModified"] === 1){
-                return {success:true, agree_users: agree, disagree_users: disagree }
+                const to_return = {success:true, agree_users: agree, disagree_users: disagree }
+                pubsub.publish(`${post_id}`, {subscribeCard: to_return} )
+                return to_return;
             }
             else{
                 return {success:false, agree_users: agree, disagree_users: disagree }

@@ -19,9 +19,9 @@ type Query{
     randomFivePosts(number: Int): [Post!]
 }
 
-# type Subscription{
-#     subscribeChatBox( name1: String!, name2:String! ): ChatBox!
-# }
+type Subscription{
+    subscribeCard( post_id:String! ): AgreeOutput!
+}
 
 type Post{
     _id: ID!
