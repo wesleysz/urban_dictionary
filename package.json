@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cd backend && yarn server && cd ../frontend && yarn start",
-    "server": "cd backend && yarn server"
+    "server": "cd backend && yarn server "
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4"
