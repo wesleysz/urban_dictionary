@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start": "cd backend && yarn server && cd ../frontend && yarn start",
-    // "start": "cd backend && yarn server",
     "server": "cd backend && yarn server"
   },
   "dependencies": {
