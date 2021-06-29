@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "server": "node src/index.js --ext js,graphql --exec babel-node"
+    "server": "node src/index.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
