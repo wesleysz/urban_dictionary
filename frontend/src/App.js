@@ -7,7 +7,6 @@ import { useMutation } from "@apollo/react-hooks";
 import { Space, Input, AutoComplete } from "antd";
 import { QUE_QUERY_BY_STRING } from "./graphql";
 
-import LogIn from "./Components/LogIn";
 import Add from "./Components/Add";
 import NotLogin from "./Components/NotLogin";
 import NotLoginAdd from "./Components/NotLoginAdd";
