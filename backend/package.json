@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "server": "nodemon src/index.js --ext js,graphql --exec babel-node"
+    "server": "node src/index.js --ext js,graphql --exec babel-node"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,7 +13,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongoose": "^5.12.15",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node": "^16.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -24,7 +25,8 @@
     "@babel/plugin-transform-arrow-functions": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
     "graphql-yoga": "^1.18.3",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "node": "^16.4.0"
   },
   "type": "module"
 }
